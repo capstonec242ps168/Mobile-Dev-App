@@ -12,7 +12,7 @@
         android:text="Home"
         android:gravity="center"
         android:textSize="24sp"
-        android:textColor="@color/green"
+        android:textColor="@color/black"
         android:textStyle="bold"/>
 
 </FrameLayout>
