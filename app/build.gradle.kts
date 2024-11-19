@@ -49,10 +49,16 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.support.annotations)
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
 //    GLIDE
     implementation(libs.glide)
+
+//    NAVIGATION
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 }
