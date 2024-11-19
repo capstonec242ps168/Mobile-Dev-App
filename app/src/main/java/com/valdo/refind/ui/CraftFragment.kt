@@ -1,25 +1,23 @@
 package com.valdo.refind.ui
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-<<<<<<< HEAD
 import com.valdo.refind.R
 
-class NewsFragment : Fragment() {
-=======
-import com.valdo.refind.ARG_PARAM1
-import com.valdo.refind.ARG_PARAM2
-import com.valdo.refind.R
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NewsFragment.newInstance] factory method to
+ * Use the [CraftFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NewsFragment : Fragment() {
+class CraftFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -31,19 +29,14 @@ class NewsFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
->>>>>>> b34cb86e617592f55219b5b11ae3668c0209cb30
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        return inflater.inflate(R.layout.fragment_craft, container, false)
     }
-<<<<<<< HEAD
-}
-
-=======
 
     companion object {
         /**
@@ -52,12 +45,12 @@ class NewsFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment NewsFragment.
+         * @return A new instance of fragment CraftFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            NewsFragment().apply {
+            CraftFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -65,4 +58,3 @@ class NewsFragment : Fragment() {
             }
     }
 }
->>>>>>> b34cb86e617592f55219b5b11ae3668c0209cb30
