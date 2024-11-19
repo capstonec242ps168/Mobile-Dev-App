@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:layout_marginStart="12dp"
-                android:text="Tingginya jumlah sampah menumpuk di Indonesia"
+                android:text="@string/news_title"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/news_header_container"
@@ -90,8 +90,6 @@
                 app:layout_constraintTop_toBottomOf="@id/news_title"
                 app:layout_constraintStart_toStartOf="parent" />
 
-
-
             <View
                 android:id="@+id/divider_line"
                 android:layout_width="0dp"
@@ -102,13 +100,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- dummy text ganti news_content -->
             <TextView
                 android:id="@+id/news_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:layout_marginHorizontal="12dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique eros vel enim volutpat porta. Vivamus nec condimentum ipsum. Duis lacinia, augue et pellentesque scelerisque, ex nisi aliquet lacus, at egestas tortor mauris vel eros. Donec laoreet faucibus ullamcorper. Aliquam pretium sed purus vel ornare. Etiam ut elit semper, ornare felis a, dictum quam. Suspendisse non leo vel orci commodo accumsan. Praesent vehicula tellus quis sollicitudin ultrices. Sed tempor condimentum metus, ut consectetur est."
+                android:text="@string/dummy"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

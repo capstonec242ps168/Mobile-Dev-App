@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Refind" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/green</item>
-         <item name="colorPrimaryVariant">@color/green</item>
-         <item name="android:statusBarColor">@color/green</item>
+         <item name="colorPrimary">@color/gray</item>
+         <item name="colorPrimaryVariant">@color/gray</item>
+         <item name="android:statusBarColor">@color/gray</item>
     </style>
 
     <style name="Theme.Refind" parent="Base.Theme.Refind" />

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/cream">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondaryGreen"
+        android:background="@color/green"
         android:title="Profil"
-        android:titleTextColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:titleTextColor="@android:color/white"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Title" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Profile Image -->
     <ImageView
@@ -26,9 +27,9 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/circle_shape"
         android:src="@drawable/ic_profile_placeholder"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Edit Profile Image Button -->
     <ImageView
@@ -38,8 +39,8 @@
         android:layout_marginTop="-25dp"
         android:background="@drawable/circle_shape_green"
         android:src="@drawable/photo"
-        app:layout_constraintEnd_toEndOf="@id/profile_image"
-        app:layout_constraintTop_toBottomOf="@id/profile_image" />
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
+        app:layout_constraintEnd_toEndOf="@id/profile_image" />
 
     <!-- Username Section -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,9 +48,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Username Icon -->
         <ImageView
@@ -58,9 +59,9 @@
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_username"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Username Text -->
         <TextView
@@ -71,9 +72,9 @@
             android:text="@string/username"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/username_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Edit Username Icon -->
         <ImageView
@@ -82,9 +83,9 @@
             android:layout_height="24dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_edit"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Horizontal Line -->
@@ -92,13 +93,13 @@
         android:id="@+id/divider_line"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="#999999"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username_section"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username_section" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <!-- Email Section -->
@@ -107,9 +108,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider_line"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider_line">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Email Icon -->
         <ImageView
@@ -118,9 +119,9 @@
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_email"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Email Text -->
         <TextView
@@ -131,9 +132,9 @@
             android:text="@string/email"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/email_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Edit Email Icon -->
         <ImageView
@@ -142,9 +143,9 @@
             android:layout_height="24dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_edit"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

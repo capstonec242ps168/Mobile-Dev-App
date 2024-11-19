@@ -8,6 +8,11 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="news">Berita</string>
-    <string name="craft">Kerajinan\n</string>
+    <string name="craft">Kerajinan</string>
     <string name="saveBtn">Simpan</string>
+    <string name="about">Tentang kami</string>
+    <string name="news_title">Judul Berita</string>
+    <string name="news_content">Isi Berita</string>
+    <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique eros vel enim volutpat porta. Vivamus nec condimentum ipsum. Duis lacinia, augue et pellentesque scelerisque, ex nisi aliquet lacus, at egestas tortor mauris vel eros. Donec laoreet faucibus ullamcorper. Aliquam pretium sed purus vel ornare. Etiam ut elit semper, ornare felis a, dictum quam. Suspendisse non leo vel orci commodo accumsan. Praesent vehicula tellus quis sollicitudin ultrices.</string>
+    <string name="craft_title">Nama Kerajinan</string>
 </resources>
