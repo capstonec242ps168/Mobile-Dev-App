@@ -1,15 +1,13 @@
-package com.valdo.refind
+package com.valdo.refind.ui
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.navigation.NavigationView
+import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
