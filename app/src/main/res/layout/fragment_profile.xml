@@ -17,7 +17,6 @@
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
     <!-- Profile Image -->
     <ImageView
         android:id="@+id/profile_image"
