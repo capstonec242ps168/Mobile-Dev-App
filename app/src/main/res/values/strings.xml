@@ -9,6 +9,7 @@
     <string name="email">Email</string>
     <string name="news">Berita</string>
     <string name="craft">Kerajinan</string>
+    <string name="saveBtn">Simpan</string>
     <string name="about">Tentang kami</string>
     <string name="news_title">Judul Berita</string>
     <string name="news_content">Isi Berita</string>
