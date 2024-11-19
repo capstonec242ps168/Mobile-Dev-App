@@ -2,11 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#4fa854</color>
-<<<<<<< HEAD
-    <color name="cream">#FFFBE6</color>
+    <color name="primaryGreen">#3D984D</color>
+    <color name="secondaryGreen">#347928</color>
+    <color name="background">#FFFBE6</color>
     <color name="gray">#828282</color>
-=======
-    <color name="cream">FFFBE6</color>
->>>>>>> b34cb86e617592f55219b5b11ae3668c0209cb30
 </resources>
