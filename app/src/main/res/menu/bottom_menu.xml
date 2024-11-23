@@ -11,7 +11,7 @@
         android:enabled="true" />
 
     <item
-        android:id="@+id/bottom_menu"
-        android:title="Menu"
-        android:icon="@drawable/baseline_menu_24" />
+        android:id="@+id/bottom_bookmark"
+        android:title="Bookmark"
+        android:icon="@drawable/baseline_bookmark_border_24" />
 </menu>

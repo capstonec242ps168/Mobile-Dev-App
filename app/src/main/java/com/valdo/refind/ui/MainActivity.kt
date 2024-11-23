@@ -19,33 +19,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
+        // Bottom navigation item selection listener
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when(item.itemId){
+            when (item.itemId) {
                 R.id.bottom_home -> openFragment(HomeFragment())
-                R.id.bottom_menu -> openFragment(MenuFragment())
+                R.id.bottom_bookmark -> openFragment(BookmarkFragment())
             }
             true
         }
 
         fragmentManager = supportFragmentManager
+        // Open HomeFragment by default
         openFragment(HomeFragment())
 
+        // Floating Action Button (FAB) click listener
         binding.fab.setOnClickListener {
-            Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "scan", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
 
-    private fun openFragment(fragment: Fragment){
+    private fun openFragment(fragment: Fragment) {
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
