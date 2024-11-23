@@ -1,0 +1,163 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.LoginActivity">
+
+    <ScrollView
+        android:id="@+id/scrollViewContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFBE6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Header Section -->
+            <ImageView
+                android:id="@+id/banner"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textWelcome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="16dp"
+                android:text="Masuk dan mulai jaga bumi bersama"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Login and Register Buttons -->
+            <TextView
+                android:id="@+id/textLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masuk"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                app:layout_constraintEnd_toStartOf="@+id/textRegister"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="24dp"/>
+
+            <TextView
+                android:id="@+id/textRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daftar"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                app:layout_constraintStart_toEndOf="@id/textLogin"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"/>
+
+            <!-- Username Input Section -->
+            <EditText
+                android:id="@+id/editUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan username kamu"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColorHint="#808080"
+                app:layout_constraintTop_toBottomOf="@id/textRegister"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="36dp"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Email Input Section -->
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan email kamu"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColorHint="#808080"
+                app:layout_constraintTop_toBottomOf="@id/editUsername"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Password Input Section -->
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan password kamu"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColorHint="#808080"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/editEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Confirm Password Input Section -->
+            <EditText
+                android:id="@+id/editConfirmPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Konfirmasi password kamu"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColorHint="#808080"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/editPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"/>
+
+            <!-- Login Button -->
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="228dp"
+                android:layout_height="wrap_content"
+                android:text="Masuk"
+                android:backgroundTint="@color/primaryGreen"
+                android:paddingVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@id/editConfirmPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="24dp"/>
+
+            <!-- Register Suggestion -->
+            <TextView
+                android:id="@+id/textRegisterPrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sudah punya akun? Masuk"
+                android:textSize="12sp"
+                android:textColor="#3D984D"
+                app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
