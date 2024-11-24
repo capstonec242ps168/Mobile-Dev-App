@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        fragmentManager = supportFragmentManager
+
         // Bottom navigation item selection listener
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -28,13 +30,15 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        fragmentManager = supportFragmentManager
         // Open HomeFragment by default
-        openFragment(HomeFragment())
+        if (savedInstanceState == null) {
+            openFragment(HomeFragment())
+        }
 
         // Floating Action Button (FAB) click listener
         binding.fab.setOnClickListener {
             Toast.makeText(this, "scan", Toast.LENGTH_SHORT).show()
+            // Implement scanning functionality here
         }
     }
 
@@ -48,7 +52,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun openFragment(fragment: Fragment) {
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
+        // Only replace fragment if it's not already in the container
+        val currentFragment = fragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment == null || currentFragment::class != fragment::class) {
+            fragmentTransaction.replace(R.id.fragment_container, fragment)
+            fragmentTransaction.addToBackStack(null) // Add to back stack for proper navigation
+            fragmentTransaction.commit()
+        }
     }
 }

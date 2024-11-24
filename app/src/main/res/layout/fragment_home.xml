@@ -6,42 +6,25 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <!-- Title and Top Icons -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <!-- AppBarLayout for ActionBar (Toolbar) -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Refind"
-        android:textColor="@color/primaryGreen"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:orientation="vertical"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" >
 
-    <ImageButton
-        android:id="@+id/iconPerson"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/outline_person_32"
-        app:tint="@color/black"
-        android:backgroundTint="@color/background"
-        app:layout_constraintEnd_toStartOf="@+id/iconSettings"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/iconSettings"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/baseline_settings_32"
-        app:tint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/background"
+            app:menu="@menu/top_menu"
+            android:title="@string/app_name"
+            app:titleTextColor="@color/black"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Illustration Image -->
     <ImageView
@@ -52,9 +35,10 @@
         android:src="@drawable/thinking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
+        app:layout_constraintBottom_toTopOf="@id/cvButtonsContainer" />
 
-    <!-- Button Container // material card view instead of CardView -->
+    <!-- Button Container (MaterialCardView instead of CardView) -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvButtonsContainer"
         android:layout_width="0dp"
@@ -250,59 +234,19 @@
         android:layout_marginTop="16dp"
         android:text="Berita"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvButtonsContainer" />
 
+    <!-- RecyclerView for News -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNews"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:scrollbars="vertical"
+        android:layout_marginStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBerita" />
-
-    <!-- Bottom App Bar and Floating Action Button -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bottomAppBar"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/secondaryGreen"
-            app:fabCradleMargin="-10dp"
-            app:fabAlignmentMode="center"
-            app:fabAnchorMode="cradle">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/bottom_menu"
-                app:labelVisibilityMode="labeled"
-                app:itemIconTint="@color/white"
-                android:background="@color/secondaryGreen" />
-
-        </com.google.android.material.bottomappbar.BottomAppBar>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/secondaryGreen"
-            android:src="@drawable/baseline_add_24"
-            app:layout_anchor="@id/bottomAppBar"
-            app:maxImageSize="40dp"
-            app:tint="@color/white"
-            android:id="@+id/fab" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+        app:layout_constraintTop_toBottomOf="@+id/tvBerita"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
