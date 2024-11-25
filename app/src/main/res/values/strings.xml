@@ -15,4 +15,10 @@
     <string name="news_content">Isi Berita</string>
     <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique eros vel enim volutpat porta. Vivamus nec condimentum ipsum. Duis lacinia, augue et pellentesque scelerisque, ex nisi aliquet lacus, at egestas tortor mauris vel eros. Donec laoreet faucibus ullamcorper. Aliquam pretium sed purus vel ornare. Etiam ut elit semper, ornare felis a, dictum quam. Suspendisse non leo vel orci commodo accumsan. Praesent vehicula tellus quis sollicitudin ultrices.</string>
     <string name="craft_title">Nama Kerajinan</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="use_correct_email_format">Use correct email format</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="password_must_be_at_least_8_characters">Password must be at least 8 characters</string>
+    <string name="username_hint">Enter your username</string>
+    <string name="confirm_password_hint">Confirm your password</string>
 </resources>
