@@ -6,26 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <!-- AppBarLayout for ActionBar (Toolbar) -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/toolbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" >
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/background"
-            app:menu="@menu/top_menu"
-            android:title="@string/app_name"
-            app:titleTextColor="@color/black"/>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <!-- Illustration Image -->
     <ImageView
         android:id="@+id/ivIllustration"
@@ -35,7 +15,6 @@
         android:src="@drawable/thinking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
         app:layout_constraintBottom_toTopOf="@id/cvButtonsContainer" />
 
     <!-- Button Container (MaterialCardView instead of CardView) -->
