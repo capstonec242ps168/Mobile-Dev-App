@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="ui.LoginActivity"
     android:id="@+id/main" >
 
@@ -11,7 +12,6 @@
         android:id="@+id/scrollViewContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#FFFBE6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,13 +72,27 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"/>
 
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Email"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/emailContainer"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <!-- Email Input Section -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailContainer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="42dp"
+                app:errorEnabled="true"
+                app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@+id/textRegister"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +108,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/passwordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/passwordContainer"
+                app:layout_constraintStart_toStartOf="parent" />
             <!-- Password Input Section -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordContainer"
@@ -101,6 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                app:errorEnabled="true"
                 app:passwordToggleEnabled="true"
                 app:layout_constraintTop_toBottomOf="@+id/emailContainer"
                 app:layout_constraintStart_toStartOf="parent"
