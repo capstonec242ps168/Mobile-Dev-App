@@ -1,19 +1,30 @@
 package com.valdo.refind.ui
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import android.Manifest
+import androidx.core.app.ActivityCompat
 import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityMainBinding
+import com.valdo.refind.ui.MainActivity.Companion.CameraX_Permissions
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+/*      permission
+        if (!hasRequiredPermissions()) {
+            ActivityCompat.requestPermissions(
+                this, CameraX_Permissions, 0
+            )
+        } */
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -37,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         // Floating Action Button (FAB) click listener
         binding.fab.setOnClickListener {
-            Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show()
+            openFragment(ScanFragment())
         }
     }
 
@@ -73,5 +84,20 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun hasRequiredPermissions(): Boolean {
+        return CameraX_Permissions.all {
+            ContextCompat.checkSelfPermission(
+                applicationContext,
+                it
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    companion object {
+        private val CameraX_Permissions = arrayOf(
+            Manifest.permission.CAMERA
+        )
     }
 }
