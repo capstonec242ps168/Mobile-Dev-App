@@ -7,5 +7,10 @@
          <item name="android:statusBarColor">@color/gray</item>
     </style>
 
+    <style name="TabTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">18sp</item> <!-- Adjust text size -->
+    </style>
+
     <style name="Theme.Refind" parent="Base.Theme.Refind" />
 </resources>

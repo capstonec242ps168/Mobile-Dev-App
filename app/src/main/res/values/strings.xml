@@ -21,4 +21,6 @@
     <string name="password_must_be_at_least_8_characters">Password must be at least 8 characters</string>
     <string name="username_hint">Enter your username</string>
     <string name="confirm_password_hint">Confirm your password</string>
+    <string name="tab_text_1">Login</string>
+    <string name="tab_text_2">Register</string>
 </resources>
