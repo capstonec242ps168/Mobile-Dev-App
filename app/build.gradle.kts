@@ -64,4 +64,17 @@ dependencies {
 
 //    VIEW PAGER2
     implementation(libs.androidx.viewpager2)
+
+    // Camera
+    val camerax_version = "1.4.0"
+
+    implementation("androidx.camera:camera-core:1.4.0")
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation("androidx.camera:camera-video:${camerax_version}")
+    implementation("androidx.camera:camera-view:${camerax_version}")
+    implementation("androidx.camera:camera-extensions:${camerax_version}")
+
+    // Icons
+    implementation(libs.androidx.material.icons.extended.android)
 }
