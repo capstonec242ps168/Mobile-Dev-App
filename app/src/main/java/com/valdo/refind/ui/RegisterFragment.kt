@@ -10,15 +10,15 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.valdo.refind.R
-import com.valdo.refind.databinding.FragmentLoginBinding
+import com.valdo.refind.databinding.FragmentRegisterBinding
 
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
+    // Interaction flags
+    private var hasUsernameBeenInteractedWith = false
     private var hasEmailBeenInteractedWith = false
     private var hasPasswordBeenInteractedWith = false
 
@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,24 +48,43 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
-        binding.buttonLogin.setOnClickListener {
+        binding.buttonRegister.setOnClickListener {
+            // Mark all fields as interacted
+            hasUsernameBeenInteractedWith = true
             hasEmailBeenInteractedWith = true
             hasPasswordBeenInteractedWith = true
 
+            // Trigger final validation
             if (isValidInput()) {
-                Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+                Toast.makeText(requireContext(), "Registration successful!", Toast.LENGTH_SHORT).show()
             } else {
-                // Trigger validations in case they were skipped due to lack of interaction
-                validateEmail(binding.edLoginEmail.text.toString())
-                validatePassword(binding.edLoginPassword.text.toString())
+                validateUsername(binding.edRegisterUsername.text.toString())
+                validateEmail(binding.edRegisterEmail.text.toString())
+                validatePassword(binding.edRegisterPassword.text.toString())
             }
         }
     }
 
     private fun setupValidation() {
+        // Username validation
+        binding.edRegisterUsername.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (hasUsernameBeenInteractedWith) {
+                    validateUsername(s.toString())
+                }
+            }
+        })
+        binding.edRegisterUsername.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                hasUsernameBeenInteractedWith = true
+                validateUsername(binding.edRegisterUsername.text.toString())
+            }
+        }
+
         // Email validation
-        binding.edLoginEmail.addTextChangedListener(object : TextWatcher {
+        binding.edRegisterEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -74,15 +93,15 @@ class LoginFragment : Fragment() {
                 }
             }
         })
-        binding.edLoginEmail.setOnFocusChangeListener { _, hasFocus ->
+        binding.edRegisterEmail.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 hasEmailBeenInteractedWith = true
-                validateEmail(binding.edLoginEmail.text.toString())
+                validateEmail(binding.edRegisterEmail.text.toString())
             }
         }
 
         // Password validation
-        binding.edLoginPassword.addTextChangedListener(object : TextWatcher {
+        binding.edRegisterPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -91,11 +110,19 @@ class LoginFragment : Fragment() {
                 }
             }
         })
-        binding.edLoginPassword.setOnFocusChangeListener { _, hasFocus ->
+        binding.edRegisterPassword.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 hasPasswordBeenInteractedWith = true
-                validatePassword(binding.edLoginPassword.text.toString())
+                validatePassword(binding.edRegisterPassword.text.toString())
             }
+        }
+    }
+
+    private fun validateUsername(username: String) {
+        if (username.isEmpty()) {
+            binding.usernameContainer.error = "Username cannot be empty"
+        } else {
+            binding.usernameContainer.error = null
         }
     }
 
@@ -121,13 +148,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun isValidInput(): Boolean {
-        val email = binding.edLoginEmail.text.toString()
-        val password = binding.edLoginPassword.text.toString()
+        val username = binding.edRegisterUsername.text.toString()
+        val email = binding.edRegisterEmail.text.toString()
+        val password = binding.edRegisterPassword.text.toString()
 
+        validateUsername(username)
         validateEmail(email)
         validatePassword(password)
 
-        return binding.emailContainer.error == null &&
+        return binding.usernameContainer.error == null &&
+                binding.emailContainer.error == null &&
                 binding.passwordContainer.error == null
     }
 

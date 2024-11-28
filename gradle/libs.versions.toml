@@ -12,6 +12,7 @@ material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
 materialIconsExtended = "1.7.5"
+materialIconsExtendedAndroid = "1.7.5"
 materialVersion = "1.0.0"
 supportAnnotations = "28.0.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
@@ -30,6 +31,7 @@ androidx-camera-view = { module = "androidx.camera:camera-view" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+androidx-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "materialIconsExtendedAndroid" }
 flexbox = { module = "com.google.android:flexbox", version.ref = "flexbox" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
