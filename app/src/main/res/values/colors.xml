@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="banner">#4B4B4B</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primaryGreen">#3D984D</color>
     <color name="secondaryGreen">#347928</color>

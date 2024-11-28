@@ -23,4 +23,6 @@
     <string name="confirm_password_hint">Confirm your password</string>
     <string name="tab_text_1">Login</string>
     <string name="tab_text_2">Register</string>
+    <string name="banner_login">Masuk dan mulai jaga bumi bersama</string>
+    <string name="banner_register">Bergabunglah dan ekspresikan kreativitas daur ulangmu!</string>
 </resources>
