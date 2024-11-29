@@ -55,7 +55,8 @@ class ScanFragment : Fragment() {
         super.onCreate(savedInstanceState)
         cameraExecutor = Executors.newSingleThreadExecutor()
         (activity as? AppCompatActivity)?.supportActionBar?.hide()
-        // activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
 
     }
@@ -77,6 +78,14 @@ class ScanFragment : Fragment() {
         setupButtons()
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
     }
 
     private fun checkPermissions() {
@@ -183,7 +192,7 @@ class ScanFragment : Fragment() {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, resultFragment)  // Use the correct container ID
                         .addToBackStack(null)
-                        .commit()
+                        .commitAllowingStateLoss()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -253,6 +262,7 @@ class ScanFragment : Fragment() {
         super.onDestroy()
         cameraExecutor.shutdown()
         (activity as? AppCompatActivity)?.supportActionBar?.show()
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
     }

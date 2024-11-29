@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.replace
 import com.valdo.refind.R
 
 class SettingFragment : Fragment() {
@@ -24,6 +25,7 @@ class SettingFragment : Fragment() {
 
         // Find the 'about_app' button in the layout
         val aboutButton = view.findViewById<Button>(R.id.about_app)
+        val editProfile = view.findViewById<Button>(R.id.edit_profile)
 
         // Set an onClickListener to navigate to AboutFragment
         aboutButton.setOnClickListener {
@@ -34,6 +36,14 @@ class SettingFragment : Fragment() {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment) // Replace with your container ID
                 .addToBackStack(null) // Allow navigation back to SettingFragment
+                .commit()
+        }
+
+        editProfile.setOnClickListener {
+            val fragment = EditProfileFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
         }
     }

@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import android.Manifest
 import androidx.core.app.ActivityCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityMainBinding
 import com.valdo.refind.ui.MainActivity.Companion.CameraX_Permissions
@@ -80,9 +81,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openFragment(fragment: Fragment) {
+        val fragmentTag = fragment::class.java.simpleName
+
+        // Check if the fragment is already in the container
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment != null && currentFragment::class.java.simpleName == fragmentTag) {
+            return // Prevent reloading the same fragment
+        }
+
+        // Replace the fragment and add to back stack
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
+            .replace(R.id.fragment_container, fragment, fragmentTag)
+            .addToBackStack(fragmentTag) // Use the class name as the tag
             .commit()
     }
 

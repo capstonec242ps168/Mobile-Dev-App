@@ -13,4 +13,8 @@
     </style>
 
     <style name="Theme.Refind" parent="Base.Theme.Refind" />
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>
