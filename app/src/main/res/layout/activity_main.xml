@@ -60,8 +60,7 @@
                 app:labelVisibilityMode="unlabeled"
                 app:itemIconTint="@color/white"
                 android:background="@color/secondaryGreen"
-                style="@style/Widget.BottomNavigationView"
-                app:itemHorizontalTranslationEnabled="false" />
+                style="@style/Widget.BottomNavigationView" />
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <!-- Floating Action Button -->
@@ -69,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/secondaryGreen"
-            android:src="@drawable/baseline_add_24"
+            android:src="@drawable/outline_photo_camera_24"
             app:layout_anchor="@id/bottomAppBar"
             app:maxImageSize="40dp"
             app:tint="@color/white"

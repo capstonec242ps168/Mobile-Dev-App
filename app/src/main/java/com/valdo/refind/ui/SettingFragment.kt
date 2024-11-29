@@ -23,6 +23,10 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
+
         // Find the 'about_app' button in the layout
         val aboutButton = view.findViewById<Button>(R.id.about_app)
         val editProfile = view.findViewById<Button>(R.id.edit_profile)
@@ -46,5 +50,12 @@ class SettingFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
     }
 }

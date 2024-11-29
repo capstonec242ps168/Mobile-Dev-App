@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
@@ -30,9 +29,8 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        // Set up UI elements
+        // Set up UI always in light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        enableEdgeToEdge()
 
         imageView = findViewById(R.id.imageView)  // ImageView to change based on tab
         textView = findViewById(R.id.textWelcome)
