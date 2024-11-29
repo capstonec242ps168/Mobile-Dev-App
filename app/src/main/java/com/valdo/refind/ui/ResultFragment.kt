@@ -1,5 +1,6 @@
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -17,7 +18,11 @@ class ResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
+
+        setHasOptionsMenu(true)
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_result, container, false)
 
@@ -35,4 +40,12 @@ class ResultFragment : Fragment() {
 
         return view
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        // Remove specific menu items by ID
+        menu.findItem(R.id.action_profile)?.isVisible = false
+        menu.findItem(R.id.action_settings)?.isVisible = false
+    }
+
 }

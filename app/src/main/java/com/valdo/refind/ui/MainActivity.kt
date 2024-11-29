@@ -20,18 +20,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-/*      permission
+
+        // Request permissions if not granted
         if (!hasRequiredPermissions()) {
             ActivityCompat.requestPermissions(
                 this, CameraX_Permissions, 0
             )
-        } */
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Set up Toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.navigationIcon?.setTint(ContextCompat.getColor(this, R.color.black))
 
         // Bottom navigation listener
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -73,11 +77,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        // Handle drawer if open, otherwise handle fragment back navigation
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            // Check if there's more than one fragment in the back stack
+            val backStackCount = supportFragmentManager.backStackEntryCount
+
+            if (backStackCount > 1) {
+                // If there are fragments in the back stack, pop the current fragment and show the previous one
+                super.onBackPressed()
+            } else {
+                // If there is only one fragment (the root fragment), exit the app
+                // Alternatively, you could handle the behavior differently, e.g., prompt user before exiting
+                finish()
+            }
         }
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        updateToolbar(currentFragment ?: HomeFragment())
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed() // Handle back navigation
+        return true
     }
 
     private fun openFragment(fragment: Fragment) {
@@ -94,6 +117,19 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment, fragmentTag)
             .addToBackStack(fragmentTag) // Use the class name as the tag
             .commit()
+
+        updateToolbar(fragment)
+    }
+
+    private fun updateToolbar(fragment: Fragment) {
+        // Check the fragment type and adjust the toolbar accordingly
+        if (fragment is HomeFragment) {
+            // Hide the home button (back button) for HomeFragment
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        } else {
+            // Show the home button (back button) for other fragments
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     private fun hasRequiredPermissions(): Boolean {
@@ -102,6 +138,18 @@ class MainActivity : AppCompatActivity() {
                 applicationContext,
                 it
             ) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    // Handle the result of the permission request
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, proceed with camera usage
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

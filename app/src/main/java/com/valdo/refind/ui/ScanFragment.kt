@@ -12,6 +12,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
@@ -22,6 +23,8 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -59,6 +62,7 @@ class ScanFragment : Fragment() {
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
 
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -82,7 +86,14 @@ class ScanFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+        val activity = activity as? AppCompatActivity
+        activity?.supportActionBar?.apply {
+            show() // Make sure the ActionBar is visible
+            setDisplayHomeAsUpEnabled(true) // Show the back button
+            setDisplayShowTitleEnabled(false) // Hide the title
+        }
+
+        // Optionally hide other views like Bottom Navigation, FAB, etc.
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
@@ -258,12 +269,25 @@ class ScanFragment : Fragment() {
         }
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        // Remove specific menu items by ID
+        menu.findItem(R.id.action_profile)?.isVisible = false
+        menu.findItem(R.id.action_settings)?.isVisible = false
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
-        (activity as? AppCompatActivity)?.supportActionBar?.show()
+        val activity = activity as? AppCompatActivity
+        activity?.supportActionBar?.apply {
+            show() // Ensure the toolbar is shown again
+            setDisplayHomeAsUpEnabled(false) // Hide the back button when leaving the fragment
+            setDisplayShowTitleEnabled(true) // Show title if needed
+        }
+
+        // Restore visibility of other views
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
-        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
-    }
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE    }
 }

@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Refind" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/gray</item>
-         <item name="colorPrimaryVariant">@color/gray</item>
-         <item name="android:statusBarColor">@color/gray</item>
+        <item name="colorPrimary">@color/gray</item>
+        <item name="colorPrimaryVariant">@color/gray</item>
+        <item name="android:statusBarColor">@color/gray</item>
     </style>
 
     <style name="TabTextStyle" parent="TextAppearance.Design.Tab">
