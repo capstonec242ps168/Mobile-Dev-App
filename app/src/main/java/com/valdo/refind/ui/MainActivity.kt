@@ -55,6 +55,20 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             openFragment(ScanFragment())
         }
+
+        // Listen for back stack changes to update toolbar title
+        supportFragmentManager.addOnBackStackChangedListener {
+            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            val title = when (fragment) {
+                is ProfileFragment -> "Profile"
+                is BookmarkFragment -> "Bookmarks"
+                is SettingFragment -> "Settings"
+                is EditProfileFragment -> "Edit Profile"
+                is AboutFragment -> "About us"
+                else -> getString(R.string.app_name)
+            }
+            supportActionBar?.title = title
+        }
     }
 
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
@@ -130,16 +144,6 @@ class MainActivity : AppCompatActivity() {
             // Show the home button (back button) for other fragments
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-
-        // Set toolbar title based on the fragment
-        val title = when (fragment) {
-            is ProfileFragment -> "Profile"
-            is HomeFragment -> "Home"
-            is BookmarkFragment -> "Bookmarks"
-            is SettingFragment -> "Settings"
-            else -> getString(R.string.app_name)
-        }
-        supportActionBar?.title = title
     }
 
     private fun hasRequiredPermissions(): Boolean {
