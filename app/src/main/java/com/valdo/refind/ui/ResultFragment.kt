@@ -25,7 +25,7 @@ class ResultFragment : Fragment() {
         resultText = view.findViewById(R.id.result_text)
 
         // Get the image path from the arguments
-        val imagePath = arguments?.getString("image_path")
+        val imagePath = arguments?.getString("imageUri")
         imagePath?.let {
             // Use Glide or Picasso to load the image
             Glide.with(this)
