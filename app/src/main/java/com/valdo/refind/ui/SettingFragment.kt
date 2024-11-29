@@ -69,4 +69,10 @@ class SettingFragment : Fragment() {
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
     }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        // Remove specific menu items by ID
+        menu.findItem(R.id.action_profile)?.isVisible = false
+        menu.findItem(R.id.action_settings)?.isVisible = false
+    }
 }
