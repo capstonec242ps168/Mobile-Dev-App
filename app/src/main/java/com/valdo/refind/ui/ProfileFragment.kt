@@ -3,6 +3,7 @@ package com.valdo.refind.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,8 @@ class ProfileFragment : Fragment() {
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
+
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -25,6 +28,13 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
 
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        // Remove specific menu items by ID
+        menu.findItem(R.id.action_profile)?.isVisible = false
+        menu.findItem(R.id.action_settings)?.isVisible = false
     }
 
     override fun onDestroy() {

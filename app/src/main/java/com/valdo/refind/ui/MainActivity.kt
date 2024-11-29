@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import android.Manifest
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.valdo.refind.R
@@ -29,9 +30,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set up UI always in light mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         // Set up Toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        // Listen for back stack changes to update toolbar title
+        supportFragmentManager.addOnBackStackChangedListener {
+            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            val title = when (fragment) {
+                is ProfileFragment -> "Profile"
+                is BookmarkFragment -> "Bookmarks"
+                is SettingFragment -> "Settings"
+                else -> getString(R.string.app_name)
+            }
+            supportActionBar?.title = title
+        }
 
         // Bottom navigation listener
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -92,8 +108,18 @@ class MainActivity : AppCompatActivity() {
         // Replace the fragment and add to back stack
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment, fragmentTag)
-            .addToBackStack(fragmentTag) // Use the class name as the tag
+            .addToBackStack(fragmentTag)
             .commit()
+
+        // Set toolbar title based on the fragment
+        val title = when (fragment) {
+            is ProfileFragment -> "Profile"
+            is HomeFragment -> "Home"
+            is BookmarkFragment -> "Bookmarks"
+            is SettingFragment -> "Settings"
+            else -> getString(R.string.app_name)
+        }
+        supportActionBar?.title = title
     }
 
     private fun hasRequiredPermissions(): Boolean {

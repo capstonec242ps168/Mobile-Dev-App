@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -31,6 +32,9 @@ class SettingFragment : Fragment() {
         val aboutButton = view.findViewById<Button>(R.id.about_app)
         val editProfile = view.findViewById<Button>(R.id.edit_profile)
 
+        // Hide profile and setting button
+        setHasOptionsMenu(true)
+
         // Set an onClickListener to navigate to AboutFragment
         aboutButton.setOnClickListener {
             Log.d("SettingFragment", "About button clicked")
@@ -50,6 +54,13 @@ class SettingFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        // Remove specific menu items by ID
+        menu.findItem(R.id.action_profile)?.isVisible = false
+        menu.findItem(R.id.action_settings)?.isVisible = false
     }
 
     override fun onDestroy() {
