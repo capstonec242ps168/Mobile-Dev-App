@@ -29,12 +29,16 @@ class ResultFragment : Fragment() {
         resultImage = view.findViewById(R.id.result_image)
         resultText = view.findViewById(R.id.result_text)
 
-        // Get the image path from the arguments
+        // Get the image path or URI from the arguments
         val imagePath = arguments?.getString("imageUri")
-        imagePath?.let {
-            // Use Glide or Picasso to load the image
+        if (imagePath == null) {
+            resultText.text = "No image to display"
+        } else {
+            // Load the image with Glide
             Glide.with(this)
-                .load(File(it))  // Load the image from the file path
+                .load(imagePath) // Handles both URI and File paths
+//              .placeholder(R.drawable.loading_placeholder) // Show while loading
+//              .error(R.drawable.error_placeholder) // Show on failure
                 .into(resultImage)
         }
 

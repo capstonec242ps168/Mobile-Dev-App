@@ -265,6 +265,18 @@ class ScanFragment : Fragment() {
             data?.data?.let { uri ->
                 Log.d("ScanFragment", "Selected image URI: $uri")
                 Toast.makeText(requireContext(), "Image selected: $uri", Toast.LENGTH_SHORT).show()
+
+                // Pass the URI to ResultFragment
+                val resultFragment = ResultFragment()
+                val bundle = Bundle()
+                bundle.putString("imageUri", uri.toString()) // Use the image URI as a string
+                resultFragment.arguments = bundle
+
+                // Replace the current fragment with the ResultFragment
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, resultFragment) // Ensure the correct container ID
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
             }
         }
     }
