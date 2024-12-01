@@ -3,9 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.AuthActivity">
+
 
     <!-- ImageView for the image -->
     <ImageView
@@ -44,8 +46,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/background"
         app:tabGravity="fill"
-        app:tabSelectedTextColor="@color/black"
-        app:tabIndicatorColor="@color/black"
+        app:tabSelectedTextColor="@color/primaryGreen"
+        app:tabIndicatorColor="@color/secondaryGreen"
         app:tabIndicatorFullWidth="true"
         app:tabTextAppearance="@style/TabTextStyle">
 
