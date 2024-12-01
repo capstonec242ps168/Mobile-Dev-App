@@ -6,11 +6,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.valdo.refind.R
 import com.valdo.refind.databinding.FragmentLoginBinding
 
@@ -33,18 +36,38 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Handle insets for keyboard visibility
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
-            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val navInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures())
+        // Find the Forgot Password TextView and set its click listener
+        val forgotPassword = view.findViewById<TextView>(R.id.textForgotPassword)
+        val textRegister = view.findViewById<TextView>(R.id.textRegister)
+        forgotPassword.setOnClickListener {
+            navigateToForgotPassword()
+        }
 
-            // Adjust the bottom padding of the root view so the keyboard doesn't overlap
-            binding.root.setPadding(0, 0, 0, imeInsets.bottom + navInsets.bottom)
-            insets
+        textRegister.setOnClickListener {
+            navigateToRegister()
         }
 
         setupValidation()
         setupClickListeners()
+    }
+
+    private fun navigateToRegister() {
+        val viewPager = requireActivity().findViewById<ViewPager2>(R.id.viewPager)
+        viewPager.currentItem = 1  // Switch to the second tab (RegisterFragment)
+        val fragment = RegisterFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.login_fragment, fragment)  // Replace with your container ID
+            .addToBackStack(null)  // Optional: Add to back stack if you want to go back
+            .commit()
+    }
+
+    private fun navigateToForgotPassword() {
+        // Manually navigate to the ForgotPasswordFragment using FragmentTransaction
+        val fragment = ForgotPasswordFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.authActivity, fragment)  // Replace with your container ID
+            .addToBackStack(null)  // Optional: Add to back stack if you want to go back
+            .commit()
     }
 
     private fun setupClickListeners() {
@@ -54,9 +77,11 @@ class LoginFragment : Fragment() {
 
             if (isValidInput()) {
                 Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, RegisterFragment())  // Navigate to RegisterFragment
+                    .addToBackStack(null)
+                    .commit()
             } else {
-                // Trigger validations in case they were skipped due to lack of interaction
                 validateEmail(binding.edLoginEmail.text.toString())
                 validatePassword(binding.edLoginPassword.text.toString())
             }
@@ -64,7 +89,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupValidation() {
-        // Email validation
         binding.edLoginEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -81,7 +105,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-        // Password validation
         binding.edLoginPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -136,3 +159,4 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 }
+

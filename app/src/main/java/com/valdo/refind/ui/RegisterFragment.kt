@@ -6,10 +6,13 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.valdo.refind.R
 import com.valdo.refind.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -43,8 +46,23 @@ class RegisterFragment : Fragment() {
             insets
         }
 
+        val textLogin = view.findViewById<TextView>(R.id.textLogin)
+        textLogin.setOnClickListener {
+            navigateToLogin()
+        }
+
         setupValidation()
         setupClickListeners()
+    }
+
+    private fun navigateToLogin() {
+        val viewPager = requireActivity().findViewById<ViewPager2>(R.id.viewPager)
+        viewPager.currentItem = 0  // Switch to the second tab (RegisterFragment)
+        val fragment = LoginFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.register_fragment, fragment)  // Replace with your container ID
+            .addToBackStack(null)  // Optional: Add to back stack if you want to go back
+            .commit()
     }
 
     private fun setupClickListeners() {
