@@ -1,209 +1,309 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:material="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
     <!-- Illustration Image -->
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivIllustration"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/protecting_the_environment"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cvButtonsContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cvButtonsContainer" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Button Container (MaterialCardView instead of CardView) -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvButtonsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
-        app:strokeColor="@color/secondaryGreen"
-        app:strokeWidth="4dp"
-        app:cardElevation="4dp"
         app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivIllustration">
+        app:layout_constraintTop_toBottomOf="@+id/ivIllustration"
+        app:strokeColor="@color/secondaryGreen"
+        app:strokeWidth="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-            <!-- Button 1 (Plastik) -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"  />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25"  />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75"  />
+
+            <!-- Row 1 -->
             <LinearLayout
                 android:id="@+id/layoutPlastik"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/layoutKertas"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="8dp">
-
-                <ImageButton
-                    android:id="@+id/btnPlastik"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/plastic_bag"
-                    android:background="@drawable/circle"
-                    android:contentDescription="plastik"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:id="@+id/tvPlastik"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Plastik"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <!-- Button 2 (Kertas) -->
-            <LinearLayout
-                android:id="@+id/layoutKertas"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/layoutKardus"
-                app:layout_constraintStart_toEndOf="@+id/layoutPlastik"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="8dp">
-
-                <ImageButton
-                    android:id="@+id/btnKertas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/paper"
-                    android:background="@drawable/circle"
-                    android:contentDescription="kertas"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:id="@+id/tvKertas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kertas"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <!-- Button 3 (Kardus) -->
-            <LinearLayout
-                android:id="@+id/layoutKardus"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/btnPlastik"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle"
+                    android:contentDescription="@string/plastic"
+                    android:padding="8dp"
+                    android:src="@drawable/plastic_bag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/plastic"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutKertas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/btnKertas"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle"
+                    android:contentDescription="@string/paper"
+                    android:padding="8dp"
+                    android:src="@drawable/paper" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/paper"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutKardus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/layoutBaju"
                 app:layout_constraintStart_toEndOf="@+id/layoutKertas"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
                     android:id="@+id/btnKardus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:background="@drawable/circle"
-                    android:contentDescription="kardus"
+                    android:contentDescription="@string/cardboard"
                     android:padding="8dp"
                     android:src="@drawable/cardboard_box" />
 
                 <TextView
-                    android:id="@+id/tvKardus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:text="Kardus"
+                    android:text="@string/cardboard"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Button 4 (Baju) -->
             <LinearLayout
                 android:id="@+id/layoutBaju"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/layoutPlastik"
-                app:layout_constraintStart_toStartOf="@+id/layoutPlastik"
-                app:layout_constraintTop_toBottomOf="@+id/layoutPlastik">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
                     android:id="@+id/btnBaju"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:background="@drawable/circle"
-                    android:contentDescription="baju"
+                    android:contentDescription="@string/clothe"
                     android:padding="8dp"
                     android:src="@drawable/clothes" />
 
                 <TextView
-                    android:id="@+id/tvBaju"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:text="Baju"
+                    android:text="@string/clothe"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Button 5 (Kaleng) -->
+            <!-- Row 2 -->
             <LinearLayout
                 android:id="@+id/layoutKaleng"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutPlastik">
+
+                <ImageButton
+                    android:id="@+id/btnKaleng"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle"
+                    android:contentDescription="@string/metal"
+                    android:padding="8dp"
+                    android:src="@drawable/can" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/metal"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutSepatu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/layoutKertas">
+
+                <ImageButton
+                    android:id="@+id/btnSepatu"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle"
+                    android:contentDescription="@string/shoe"
+                    android:padding="8dp"
+                    android:src="@drawable/winter_boots" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/shoe"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutKaca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/layoutOrganik"
+                app:layout_constraintStart_toEndOf="@+id/layoutSepatu"
+                app:layout_constraintTop_toBottomOf="@+id/layoutKardus">
+
+                <ImageButton
+                    android:id="@+id/btnKaca"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle"
+                    android:contentDescription="@string/glass"
+                    android:padding="8dp"
+                    android:src="@drawable/beer_bottle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/glass"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutOrganik"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/layoutKertas"
-                app:layout_constraintStart_toStartOf="@+id/layoutKertas"
-                app:layout_constraintTop_toBottomOf="@+id/layoutKertas">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/layoutBaju">
 
                 <ImageButton
-                    android:id="@+id/btnKaleng"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btnOrganik"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:background="@drawable/circle"
-                    android:contentDescription="kaleng"
+                    android:contentDescription="@string/biological"
                     android:padding="8dp"
-                    android:src="@drawable/can" />
+                    android:src="@drawable/bad_banana" />
 
                 <TextView
-                    android:id="@+id/tvKaleng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:text="Kaleng"
+                    android:text="@string/biological"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
 
     <!-- News Section -->
@@ -213,7 +313,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Berita"
+        android:text="@string/news"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -224,10 +324,11 @@
         android:id="@+id/rvNews"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBerita"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBerita" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import android.Manifest
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityMainBinding
@@ -133,6 +134,21 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         updateToolbar(fragment)
+    }
+
+    fun openCraftFragment(label: String) {
+        val craftFragment = CraftFragment()
+        val bundle = Bundle()
+        bundle.putString("label", label)
+        craftFragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, craftFragment)
+            .addToBackStack("CraftFragment")
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun updateToolbar(fragment: Fragment) {

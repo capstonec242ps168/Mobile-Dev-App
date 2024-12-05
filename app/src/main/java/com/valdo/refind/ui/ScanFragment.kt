@@ -301,5 +301,6 @@ class ScanFragment : Fragment() {
         // Restore visibility of other views
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
-        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE    }
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+    }
 }

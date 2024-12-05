@@ -1,4 +1,4 @@
 package com.valdo.refind.adapter
 
-class listCraftAdapter {
+class ListNewsAdapter {
 }

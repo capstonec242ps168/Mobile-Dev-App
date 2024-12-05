@@ -23,14 +23,11 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCraft"
+            android:id="@+id/recyclerViewCrafts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            tools:listitem="@layout/item_card_craft" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

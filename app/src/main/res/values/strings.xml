@@ -25,8 +25,37 @@
     <string name="tab_text_2">Register</string>
     <string name="banner_login">Masuk dan mulai jaga bumi bersama</string>
     <string name="banner_register">Bergabunglah dan ekspresikan kreativitas daur ulangmu!</string>
-    
+
     <string name="home_title">Beranda</string>
     <string name="setting_title">Pengaturan</string>
     <string name="profile_title">Profil</string>
+    <string name="Register">Daftar</string>
+    <string name="Login">Masuk</string>
+    <string name="hint_username">Masukkan username kamu</string>
+    <string name="hint_email">Masukkan email kamu</string>
+    <string name="forgot_password">Lupa Password</string>
+    <string name="past_password">Password baru harus berbeda dengan yang lama</string>
+    <string name="hint_new_password">Masukkan password baru kamu</string>
+    <string name="hint_confirm_new_password">Masukkan kembali password kamu</string>
+    <string name="change">Ubah</string>
+    <string name="plastic">Plastik</string>
+    <string name="paper">Kertas</string>
+    <string name="cardboard">Kardus</string>
+    <string name="clothe">Baju</string>
+    <string name="metal">Kaleng</string>
+    <string name="shoe">Sepatu</string>
+    <string name="glass">Kaca</string>
+    <string name="biological">Organik</string>
+    <string name="welcome_text">Barang bekas numpuk? ayo olah jadi kerajinan!</string>
+    <string name="password">Password</string>
+    <string name="forgot_password_btn">Lupa Password?</string>
+    <string name="no_account">Belum punya akun?</string>
+    <string name="already_have_account">Sudah punya akun?</string>
+    <string name="analyze_result">Hasil Analisis</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="permission">Izin Akses</string>
+    <string name="camera">Kamera</string>
+    <string name="file">File</string>
+    <string name="about_refind">Tentang Refind</string>
+    <string name="log_out">Keluar</string>
 </resources>

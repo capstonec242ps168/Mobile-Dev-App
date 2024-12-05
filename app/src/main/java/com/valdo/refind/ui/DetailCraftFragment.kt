@@ -1,34 +1,27 @@
 package com.valdo.refind.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.valdo.refind.R
+import com.valdo.refind.data.remote.ApiClient
+import com.valdo.refind.data.remote.CraftResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailCraftFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailCraftFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var craftImage: ImageView
+    private lateinit var craftTitle: TextView
+    private lateinit var craftStep: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +31,30 @@ class DetailCraftFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_detail_craft, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailCraftFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailCraftFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Initialize the views
+        craftImage = view.findViewById(R.id.craft_image)
+        craftTitle = view.findViewById(R.id.craft_title)
+        craftStep = view.findViewById(R.id.craft_step)
+
+        // Retrieve data from arguments
+        val craftName = arguments?.getString("name")
+        val craftImageURL = arguments?.getString("image")
+        val craftStepDetails = arguments?.getString("step")
+
+        // Set data to views
+        craftTitle.text = craftName
+        craftStep.text = craftStepDetails
+
+        // Load the image using Glide
+        if (!craftImageURL.isNullOrEmpty()) {
+            Glide.with(requireContext())
+                .load(craftImageURL)
+                .into(craftImage)
+        } else {
+            craftImage.setImageResource(R.drawable.protecting_the_environment) // Replace with your placeholder image
+        }
     }
 }

@@ -72,7 +72,8 @@
             app:layout_anchor="@id/bottomAppBar"
             app:maxImageSize="40dp"
             app:tint="@color/white"
-            android:id="@+id/fab" />
+            android:id="@+id/fab"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

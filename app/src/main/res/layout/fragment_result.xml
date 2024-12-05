@@ -38,13 +38,13 @@
             android:layout_marginBottom="16dp">
 
 
-            <TextView
+            <Button
                 android:id="@+id/tv_analyze"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/container_analyze"
+                android:backgroundTint="@color/primaryGreen"
                 android:padding="16dp"
-                android:text="Hasil Analisis"
+                android:text="@string/analyze_result"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
