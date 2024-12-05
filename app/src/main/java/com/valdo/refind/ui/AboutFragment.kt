@@ -32,7 +32,6 @@ class AboutFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         // Remove specific menu items by ID
-        menu.findItem(R.id.action_profile)?.isVisible = false
         menu.findItem(R.id.action_settings)?.isVisible = false
     }
 }

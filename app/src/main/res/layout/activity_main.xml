@@ -65,14 +65,18 @@
 
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:backgroundTint="@color/secondaryGreen"
             android:src="@drawable/outline_photo_camera_24"
             app:layout_anchor="@id/bottomAppBar"
             app:maxImageSize="40dp"
             app:tint="@color/white"
-            android:id="@+id/fab" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

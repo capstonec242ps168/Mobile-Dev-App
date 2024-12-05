@@ -1,53 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/loginFragment">
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.valdo.refind.ui.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/forgotPasswordFragment"
-        android:name="com.valdo.refind.ui.ForgotPasswordFragment"
-        android:label="Forgot Password"
-        tools:layout="@layout/fragment_forgot_password" />
-
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.valdo.refind.ui.RegisterFragment"
-        android:label="Register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.valdo.refind.ui.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_profileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="com.valdo.refind.ui.EditProfileFragment"
-        android:label="Edit Profile"
-        tools:layout="@layout/fragment_edit_profile" />
-</navigation>
+    xmlns:tools="http://schemas.android.com/tools"/>
 
 

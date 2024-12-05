@@ -25,8 +25,9 @@
     <string name="tab_text_2">Register</string>
     <string name="banner_login">Masuk dan mulai jaga bumi bersama</string>
     <string name="banner_register">Bergabunglah dan ekspresikan kreativitas daur ulangmu!</string>
-    
+
     <string name="home_title">Beranda</string>
     <string name="setting_title">Pengaturan</string>
     <string name="profile_title">Profil</string>
+    <string name="client_id">70793757615-4fmg3mbvt3v77ek27vq312l2m889o03m.apps.googleusercontent.com</string>
 </resources>
