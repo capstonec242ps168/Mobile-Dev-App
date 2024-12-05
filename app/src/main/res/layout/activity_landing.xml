@@ -1,0 +1,106 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/background">
+
+    <!-- Center SVG Image -->
+    <ImageView
+        android:id="@+id/wavy"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-20dp"
+        app:srcCompat="@drawable/union"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/circleBackground"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/baseline_circle_1000"
+        android:backgroundTint="@color/background"
+        app:layout_constraintBottom_toBottomOf="@id/wavy"
+        android:layout_marginBottom="-100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Title Text -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refind"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="@color/background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="48dp" />
+
+    <ImageView
+        android:id="@+id/centerImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:contentDescription="asdaadadada"
+        app:srcCompat="@drawable/thinking"
+        app:layout_constraintTop_toTopOf="@id/circleBackground"
+        app:layout_constraintStart_toStartOf="@id/circleBackground"
+        app:layout_constraintEnd_toEndOf="@id/circleBackground"
+        android:layout_marginTop="16dp" />
+
+    <!-- Subtitle Text -->
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Barang bekas numpuk? ayo olah jadi kerajinan!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toBottomOf="@id/circleBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/signInButton"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/google_button_background_selector"
+        android:gravity="center_vertical"
+        android:elevation="5dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitleText">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_google_logo"
+            android:contentDescription="Google Icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Continue with Google"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

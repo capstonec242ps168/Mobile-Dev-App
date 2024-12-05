@@ -61,10 +61,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             val title = when (fragment) {
-                is ProfileFragment -> "Profile"
                 is BookmarkFragment -> "Bookmarks"
                 is SettingFragment -> "Settings"
-                is EditProfileFragment -> "Edit Profile"
                 is AboutFragment -> "About us"
                 else -> getString(R.string.app_name)
             }
@@ -79,10 +77,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_profile -> {
-                openFragment(ProfileFragment())
-                return true
-            }
             R.id.action_settings -> {
                 openFragment(SettingFragment())
                 return true

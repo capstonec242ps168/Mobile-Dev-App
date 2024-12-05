@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "70793757615",
+    "project_id": "capstonec242-ps168",
+    "storage_bucket": "capstonec242-ps168.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70793757615:android:557288df9bc1f2dc9fe55a",
+        "android_client_info": {
+          "package_name": "com.valdo.refind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70793757615-qqkahrom67gbpp8ervp1ailki5m83h2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valdo.refind",
+            "certificate_hash": "0b8b1bd8ea75842b17ca3f1024f53a2d55bef264"
+          }
+        },
+        {
+          "client_id": "70793757615-4fmg3mbvt3v77ek27vq312l2m889o03m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAznPGoW8wqtsC0hJEP_4svgqc9ma0UCUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70793757615-4fmg3mbvt3v77ek27vq312l2m889o03m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
