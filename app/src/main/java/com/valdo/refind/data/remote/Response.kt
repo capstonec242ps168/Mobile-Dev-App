@@ -41,6 +41,13 @@ data class CraftsResponse(
 )
 
 data class PredictResponse(
+    val result: String,
+    val message: String,
+    val data: PredictionData
+)
+
+data class PredictionData(
+    val id_trash: Int,
     val result: String
 )
 

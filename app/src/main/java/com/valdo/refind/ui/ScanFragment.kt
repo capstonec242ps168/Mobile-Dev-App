@@ -7,6 +7,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -32,6 +33,15 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.valdo.refind.R
+import com.valdo.refind.data.remote.ApiClient
+import com.valdo.refind.data.remote.PredictResponse
+import com.valdo.refind.helper.reduceFileImage
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.OutputStream
 import java.util.concurrent.ExecutorService
@@ -195,6 +205,8 @@ class ScanFragment : Fragment() {
                     Log.d("ScanFragment", "Image saved: ${photoFile.absolutePath}")
                     Toast.makeText(requireContext(), "Image saved at ${photoFile.absolutePath}", Toast.LENGTH_SHORT).show()
 
+                    uploadImage(photoFile)
+
                     // Pass the file URI to the ResultFragment
                     val resultFragment = ResultFragment()
                     val bundle = Bundle()
@@ -214,6 +226,32 @@ class ScanFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun uploadImage(file: File) {
+        Log.d("ScanFragment", "Uploading image: ${file.absolutePath}")
+        val reducedFile = file.reduceFileImage()
+
+        Log.d("ScanFragment", "Image reduced to: ${reducedFile.length()} bytes")
+
+        val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull()) // Define the file type
+        val part = MultipartBody.Part.createFormData("image", reducedFile.name, requestBody)
+
+        ApiClient.apiService.postPrediction(part).enqueue(object : Callback<PredictResponse> {
+            override fun onResponse(call: Call<PredictResponse>, response: Response<PredictResponse>) {
+                if (response.isSuccessful) {
+                    val predictionResult = response.body()?.data?.result
+                    Log.d("ScanFragment", "Prediction Result: $predictionResult")
+                    Toast.makeText(requireContext(), "Prediction: $predictionResult", Toast.LENGTH_LONG).show()
+                } else {
+                    Log.e("ScanFragment", "API call failed: ${response.code()} - ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
+                Log.e("ScanFragment", "API call error: ${t.message}")
+            }
+        })
     }
 
 
@@ -265,6 +303,8 @@ class ScanFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
+                val file = File(getRealPathFromURI(uri))  // Convert URI to File
+                uploadImage(file)
                 Log.d("ScanFragment", "Selected image URI: $uri")
                 Toast.makeText(requireContext(), "Image selected: $uri", Toast.LENGTH_SHORT).show()
 
@@ -280,6 +320,24 @@ class ScanFragment : Fragment() {
                     .addToBackStack(null)
                     .commitAllowingStateLoss()
             }
+        }
+    }
+
+    private fun getRealPathFromURI(uri: Uri): String {
+        var cursor: android.database.Cursor? = null
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+
+        try {
+            // Query the MediaStore for the actual path of the file
+            cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
+            val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor?.moveToFirst()
+            return cursor?.getString(columnIndex ?: -1) ?: ""
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ""
+        } finally {
+            cursor?.close()
         }
     }
 

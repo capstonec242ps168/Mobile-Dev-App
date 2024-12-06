@@ -29,7 +29,7 @@ interface ApiService {
     @Multipart
     @POST("/predict")
     fun postPrediction(
-        @Part file: MultipartBody.Part
+        @Part image: MultipartBody.Part
     ): Call<PredictResponse>
 
     @POST("/bookmark")

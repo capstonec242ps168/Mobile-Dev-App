@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.valdo.refind.R
-import java.io.File
 
 class ResultFragment : Fragment() {
 
@@ -18,29 +17,23 @@ class ResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View? {
-
-        setHasOptionsMenu(true)
-
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_result, container, false)
 
         resultImage = view.findViewById(R.id.result_image)
         resultText = view.findViewById(R.id.result_text)
 
-        // Get the image path or URI from the arguments
+        // Retrieve data from arguments
         val imagePath = arguments?.getString("imageUri")
-        if (imagePath == null) {
-            resultText.text = "No image to display"
-        } else {
-            // Load the image with Glide
+        val predictionResult = arguments?.getString("predictionResult")
+
+        if (imagePath != null) {
             Glide.with(this)
-                .load(imagePath) // Handles both URI and File paths
-//              .placeholder(R.drawable.loading_placeholder) // Show while loading
-//              .error(R.drawable.error_placeholder) // Show on failure
+                .load(imagePath)
                 .into(resultImage)
         }
+
+        resultText.text = predictionResult ?: "No prediction result available"
 
         return view
     }

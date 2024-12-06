@@ -5,14 +5,6 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        create("release") {
-            storeFile = file("C:\\Users\\Farel\\.android\\keystore.jks")
-            storePassword = "12345678"
-            keyAlias = "key0"
-            keyPassword = "12345678"
-        }
-    }
     namespace = "com.valdo.refind"
     compileSdk = 35
 
@@ -93,6 +85,9 @@ dependencies {
 
     // Icons
     implementation(libs.androidx.material.icons.extended)
+
+    // OkHttp for file uploads
+    implementation ("com.squareup.okhttp3:okhttp:4.9.0")
 
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
