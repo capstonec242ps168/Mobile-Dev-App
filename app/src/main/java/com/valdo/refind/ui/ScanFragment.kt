@@ -177,9 +177,11 @@ class ScanFragment : Fragment() {
 
     private fun takePicture() {
         if (!::imageCapture.isInitialized) {
-            Toast.makeText(requireContext(), "Camera not ready yet", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "No camera permission", Toast.LENGTH_SHORT).show()
             return
         }
+
+        saveImageToMediaStore(imageCapture, requireContext())
 
         // Save to app-specific storage
         val photoFile = File(requireContext().getExternalFilesDir(null), "photo_${System.currentTimeMillis()}.jpg")

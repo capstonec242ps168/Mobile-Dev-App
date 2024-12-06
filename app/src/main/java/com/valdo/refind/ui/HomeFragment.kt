@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.valdo.refind.R
 import com.valdo.refind.data.remote.ApiConfig
 
@@ -38,13 +39,28 @@ class HomeFragment : Fragment() {
     private fun setButtonClickListener(view: View, buttonId: Int, endpoint: String) {
         view.findViewById<View>(buttonId).setOnClickListener {
             logApiCall(endpoint)
-            (activity as? MainActivity)?.openCraftFragment(endpoint)
+            openCraftFragment(endpoint)
         }
     }
 
     private fun logApiCall(endpoint: String) {
         val url = "$baseUrl/$endpoint"
         Log.d("HomeFragment", "API called: $url")
+    }
+
+    private fun openCraftFragment(label: String) {
+        val craftFragment = CraftFragment()
+        val bundle = Bundle()
+        bundle.putString("label", label)
+        craftFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, craftFragment)
+            .addToBackStack("CraftFragment")
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onResume() {

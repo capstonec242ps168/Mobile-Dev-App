@@ -57,8 +57,6 @@ class SettingFragment : Fragment() {
             Log.w("SettingFragment", "No user is signed in")
         }
 
-
-
         // Hide navigation items
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
@@ -78,6 +76,14 @@ class SettingFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             logoutUser()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
     }
 
     private fun logoutUser() {

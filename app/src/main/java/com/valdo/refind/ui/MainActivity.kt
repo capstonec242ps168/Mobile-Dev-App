@@ -130,21 +130,6 @@ class MainActivity : AppCompatActivity() {
         updateToolbar(fragment)
     }
 
-    fun openCraftFragment(label: String) {
-        val craftFragment = CraftFragment()
-        val bundle = Bundle()
-        bundle.putString("label", label)
-        craftFragment.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, craftFragment)
-            .addToBackStack("CraftFragment")
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
     private fun updateToolbar(fragment: Fragment) {
         // Check the fragment type and adjust the toolbar accordingly
         if (fragment is HomeFragment) {
