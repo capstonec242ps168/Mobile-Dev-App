@@ -95,7 +95,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.code.gson:gson:2.8.8")
 
+    implementation ("androidx.exifinterface:exifinterface:1.3.7")
+
     implementation(libs.firebase.auth)
+//    implementation ("com.google.firebase:firebase-firestore:25.1.1")
     implementation(libs.play.services.auth)
     implementation(libs.androidx.credentials)
 

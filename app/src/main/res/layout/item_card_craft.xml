@@ -19,8 +19,8 @@
 
         <Button
             android:id="@+id/btnBookmark"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:background="@drawable/baseline_bookmark_border_24"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"

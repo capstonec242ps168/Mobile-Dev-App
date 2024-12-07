@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,8 @@ import com.bumptech.glide.Glide
 import com.valdo.refind.R
 import com.valdo.refind.data.remote.CraftResponse
 
-class ListCraftAdapter(private val onItemClick: (CraftResponse) -> Unit)
+class ListCraftAdapter(private val onItemClick: (CraftResponse) -> Unit,
+                       private val onBookmarkClick: (CraftResponse) -> Unit)
     : RecyclerView.Adapter<ListCraftAdapter.CraftViewHolder>() {
 
     private var craftList: List<CraftResponse> = emptyList()
@@ -38,6 +40,7 @@ class ListCraftAdapter(private val onItemClick: (CraftResponse) -> Unit)
     inner class CraftViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val craftTitle: TextView = itemView.findViewById(R.id.craftTitle)
         private val craftImage: ImageView = itemView.findViewById(R.id.craftPhoto)
+        private val btnBookmark: Button = itemView.findViewById(R.id.btnBookmark)
 
         fun bind(craft: CraftResponse) {
             craftTitle.text = craft.Crafts?.name
@@ -49,6 +52,10 @@ class ListCraftAdapter(private val onItemClick: (CraftResponse) -> Unit)
 
             itemView.setOnClickListener {
                 onItemClick(craft)  // Pass the full CraftResponse object
+            }
+
+            btnBookmark.setOnClickListener {
+                onBookmarkClick(craft) // Call the bookmark callback
             }
         }
     }

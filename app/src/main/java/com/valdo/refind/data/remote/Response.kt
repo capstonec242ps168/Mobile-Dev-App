@@ -52,11 +52,13 @@ data class PredictionData(
 )
 
 data class BookmarkRequest(
-    val itemId: String, val userId: String
+    val itemId: String,
+    val userId: String
 )
 
 data class BookmarkResponse(
-    val success: Boolean
+    val status: String,
+    val message: String
 )
 
 data class HistoryResponse(

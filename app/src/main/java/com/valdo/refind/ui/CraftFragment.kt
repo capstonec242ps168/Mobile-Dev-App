@@ -5,12 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.valdo.refind.R
 import com.valdo.refind.adapter.ListCraftAdapter
 import com.valdo.refind.data.remote.ApiClient
+import com.valdo.refind.data.remote.BookmarkRequest
+import com.valdo.refind.data.remote.BookmarkResponse
 import com.valdo.refind.data.remote.CraftResponse
 import com.valdo.refind.data.remote.CraftsResponse
 import retrofit2.Call
@@ -42,12 +46,41 @@ class CraftFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = ListCraftAdapter(onItemClick = { craft ->
             openDetailCraftFragment(craft)
+        },onBookmarkClick = { craft ->
+            addToBookmarks(craft) // Function to add the craft to bookmarks
         })
         recyclerView.adapter = adapter
 
         // Retrieve label from arguments
         val label = arguments?.getString("label") ?: ""
         fetchCrafts(label)
+    }
+
+    private fun addToBookmarks(craft: CraftResponse) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            BookmarkRepository.addCraftToBookmarks(craft)
+            Toast.makeText(requireContext(), "${craft.Crafts?.name} added to bookmarks!", Toast.LENGTH_SHORT).show()
+
+            // Call the API to add bookmark in the backend
+            val apiService = ApiClient.apiService
+            val call = apiService.addBookmark(BookmarkRequest(itemId = craft.craft_id.toString(), userId = userId))
+            call.enqueue(object : Callback<BookmarkResponse> {
+                override fun onResponse(call: Call<BookmarkResponse>, response: Response<BookmarkResponse>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(requireContext(), "Bookmark synced with server!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to sync bookmark!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<BookmarkResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            Toast.makeText(requireContext(), "User not logged in!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun fetchCrafts(label: String) {

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.BookmarkFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,14 +24,11 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBookmark"
+            android:id="@+id/recyclerViewBookmark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            tools:listitem="@layout/item_card_craft" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
