@@ -1,3 +1,5 @@
+package com.valdo.refind.ui
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -11,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.valdo.refind.R
-import com.valdo.refind.ui.CraftFragment
 
 class ResultFragment : Fragment() {
 
