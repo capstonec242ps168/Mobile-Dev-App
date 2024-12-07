@@ -213,11 +213,7 @@ class ScanFragment : Fragment() {
                     bundle.putString("imageUri", photoFile.absolutePath)  // Pass the image file path or URI
                     resultFragment.arguments = bundle
 
-                    // Replace the current fragment with the ResultFragment
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, resultFragment)  // Use the correct container ID
-                        .addToBackStack(null)
-                        .commitAllowingStateLoss()
+
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -243,6 +239,23 @@ class ScanFragment : Fragment() {
                     val predictionResult = response.body()?.data?.result
                     Log.d("ScanFragment", "Prediction Result: $predictionResult")
                     Toast.makeText(requireContext(), "Prediction: $predictionResult", Toast.LENGTH_LONG).show()
+
+                    val targetFragment = when (predictionResult) {
+                        "battery", "biological", "trashes" -> NoCraftFragment()
+                        else -> ResultFragment()
+                    }
+
+                    val bundle = Bundle().apply {
+                        putString("predictionResult", predictionResult)
+                        putString("imageUri", file.absolutePath)
+                    }
+                    targetFragment.arguments = bundle
+
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, targetFragment)
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss()
+
                 } else {
                     Log.e("ScanFragment", "API call failed: ${response.code()} - ${response.message()}")
                 }
@@ -304,7 +317,7 @@ class ScanFragment : Fragment() {
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 val file = File(getRealPathFromURI(uri))  // Convert URI to File
-                uploadImage(file)
+                uploadImageFromUri(uri)
                 Log.d("ScanFragment", "Selected image URI: $uri")
                 Toast.makeText(requireContext(), "Image selected: $uri", Toast.LENGTH_SHORT).show()
 
@@ -314,13 +327,16 @@ class ScanFragment : Fragment() {
                 bundle.putString("imageUri", uri.toString()) // Use the image URI as a string
                 resultFragment.arguments = bundle
 
-                // Replace the current fragment with the ResultFragment
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, resultFragment) // Ensure the correct container ID
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss()
             }
         }
+    }
+
+    private fun uploadImageFromUri(uri: Uri) {
+        // You can use the URI directly for upload instead of converting to a file path.
+        val inputStream = requireContext().contentResolver.openInputStream(uri)
+        val file = File.createTempFile("temp_image", ".jpg", requireContext().cacheDir)
+        inputStream?.copyTo(file.outputStream())
+        uploadImage(file) // Upload the image file after creating it from the URI
     }
 
     private fun getRealPathFromURI(uri: Uri): String {

@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         setButtonClickListener(view, R.id.btnKaca, "white-glass")
     }
 
-    private fun setButtonClickListener(view: View, buttonId: Int, endpoint: String) {
+    protected fun setButtonClickListener(view: View, buttonId: Int, endpoint: String) {
         view.findViewById<View>(buttonId).setOnClickListener {
             logApiCall(endpoint)
             openCraftFragment(endpoint)

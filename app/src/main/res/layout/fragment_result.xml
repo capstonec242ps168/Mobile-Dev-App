@@ -26,29 +26,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
-            android:text="Barang yang dapat diolah menjadi kerajinan : "
-            />
+            android:text="Barang yang dapat diolah menjadi kerajinan : " />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_craft_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:backgroundTint="@color/primaryGreen"
             android:gravity="center"
+            android:padding="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginHorizontal="64dp"
+            android:text="@string/craft_list"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-
-            <Button
-                android:id="@+id/tv_analyze"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/primaryGreen"
-                android:padding="16dp"
-                android:text="@string/analyze_result"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -9,7 +9,7 @@ data class TrashesResponse(
 data class TrashResponse(
     val ID: Int,
     val type: String,
-    val treatment: String?
+    val treatment: String
 )
 
 data class AuthRequest(
