@@ -30,7 +30,7 @@
             />
 
         <TextView
-            android:id="@+id/warning_content"
+            android:id="@+id/treatment"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_width="match_parent"
