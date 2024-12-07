@@ -1,6 +1,5 @@
 package com.valdo.refind.ui
 
-import ResultFragment
 import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
@@ -9,14 +8,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.ImageCapture
@@ -24,11 +21,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -207,7 +200,7 @@ class ScanFragment : Fragment() {
 
                     uploadImage(photoFile)
 
-                    // Pass the file URI to the ResultFragment
+                    // Pass the file URI to the com.valdo.refind.ui.ResultFragment
                     val resultFragment = ResultFragment()
                     val bundle = Bundle()
                     bundle.putString("imageUri", photoFile.absolutePath)  // Pass the image file path or URI
@@ -321,7 +314,7 @@ class ScanFragment : Fragment() {
                 Log.d("ScanFragment", "Selected image URI: $uri")
                 Toast.makeText(requireContext(), "Image selected: $uri", Toast.LENGTH_SHORT).show()
 
-                // Pass the URI to ResultFragment
+                // Pass the URI to com.valdo.refind.ui.ResultFragment
                 val resultFragment = ResultFragment()
                 val bundle = Bundle()
                 bundle.putString("imageUri", uri.toString()) // Use the image URI as a string
