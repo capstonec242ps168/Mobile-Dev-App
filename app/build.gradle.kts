@@ -54,9 +54,12 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.material.v100)
     implementation(libs.firebase.auth)
+    implementation ("com.google.firebase:firebase-firestore:25.1.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation ("com.google.guava:guava:32.0.1-jre")
 
 //    GLIDE
     implementation(libs.glide)
@@ -95,9 +98,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.code.gson:gson:2.8.8")
 
-    implementation ("androidx.exifinterface:exifinterface:1.3.7")
 
-    implementation(libs.firebase.auth)
 //    implementation ("com.google.firebase:firebase-firestore:25.1.1")
     implementation(libs.play.services.auth)
     implementation(libs.androidx.credentials)

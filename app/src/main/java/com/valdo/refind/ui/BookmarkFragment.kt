@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.valdo.refind.R
 import com.valdo.refind.adapter.ListCraftAdapter
 import com.valdo.refind.data.remote.CraftResponse
@@ -18,7 +17,6 @@ class BookmarkFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ListCraftAdapter
-    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,18 +38,30 @@ class BookmarkFragment : Fragment() {
 
         loadBookmarks()
 
-        // Listen for user changes and clear bookmarks if the user switches accounts
-        auth.addAuthStateListener { loadBookmarks() }
     }
 
     private fun loadBookmarks() {
-        adapter.setCrafts(BookmarkRepository.getBookmarkedCrafts())
+        BookmarkRepository.getBookmarkedCrafts(
+            onResult = { bookmarks ->
+                adapter.setCrafts(bookmarks)
+            },
+            onFailure = { e ->
+                Toast.makeText(requireContext(), "Error loading bookmarks: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     private fun removeFromBookmarks(craft: CraftResponse) {
-        BookmarkRepository.removeCraftFromBookmarks(craft)
-        Toast.makeText(requireContext(), "${craft.Crafts?.name} removed from bookmarks!", Toast.LENGTH_SHORT).show()
-        loadBookmarks() // Refresh the bookmark list
+        BookmarkRepository.removeCraftFromBookmarks(
+            craft,
+            onSuccess = {
+                Toast.makeText(requireContext(), "${craft.Crafts?.name} removed from bookmarks!", Toast.LENGTH_SHORT).show()
+                loadBookmarks() // Refresh the bookmark list
+            },
+            onFailure = { e ->
+                Toast.makeText(requireContext(), "Error removing bookmark: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     private fun openDetailCraftFragment(craft: CraftResponse) {

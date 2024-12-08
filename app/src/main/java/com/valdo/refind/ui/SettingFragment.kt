@@ -89,7 +89,7 @@ class SettingFragment : Fragment() {
 
     private fun logoutUser() {
         auth.signOut() // Sign out from Firebase
-        BookmarkRepository.clearBookmarksForUser()
+//        BookmarkRepository.clearBookmarksForUser()
         val intent = Intent(requireActivity(), LandingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

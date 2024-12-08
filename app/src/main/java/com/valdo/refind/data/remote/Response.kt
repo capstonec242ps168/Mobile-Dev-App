@@ -21,23 +21,24 @@ data class AuthResponse(
 )
 
 data class CraftResponse(
-    val ID: Int,
-    val trash_id: Int,
-    val craft_id: Int,
+    val ID: Int = 0,
+    val trash_id: Int = 0,
+    val craft_id: Int = 0,
     val Crafts: CraftDetails
 )
 
 data class CraftDetails(
-    val ID: Int,
+    val ID: Int = 0,
     val name: String,
     val tools_materials: String,
     val step: String,
     val image: String
 )
 
+
 data class CraftsResponse(
     val status: String,
-    val result: List<CraftResponse>?
+    val result: List<CraftResponse>
 )
 
 data class PredictResponse(
