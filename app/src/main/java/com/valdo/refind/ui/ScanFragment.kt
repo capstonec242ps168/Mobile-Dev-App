@@ -125,7 +125,7 @@ class ScanFragment : Fragment() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setupCamera()
             } else {
-                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Tidak ada akses kamera", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -155,8 +155,7 @@ class ScanFragment : Fragment() {
                     imageCapture
                 )
             } catch (e: Exception) {
-                Log.e("ScanFragment", "Camera binding failed", e)
-                Toast.makeText(requireContext(), "Camera setup failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Gagal mengakses kamera", Toast.LENGTH_SHORT).show()
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
@@ -179,7 +178,7 @@ class ScanFragment : Fragment() {
 
     private fun takePicture() {
         if (!::imageCapture.isInitialized) {
-            Toast.makeText(requireContext(), "No camera permission", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Tidak ada akses kamera", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -194,8 +193,6 @@ class ScanFragment : Fragment() {
             ContextCompat.getMainExecutor(requireContext()),
             object : androidx.camera.core.ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: androidx.camera.core.ImageCapture.OutputFileResults) {
-                    Log.d("ScanFragment", "Image saved: ${photoFile.absolutePath}")
-                    Toast.makeText(requireContext(), "Image saved at ${photoFile.absolutePath}", Toast.LENGTH_SHORT).show()
 
                     uploadImage(photoFile)
 
@@ -209,15 +206,13 @@ class ScanFragment : Fragment() {
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Log.e("ScanFragment", "Error saving image", exception)
-                    Toast.makeText(requireContext(), "Failed to save image: ${exception.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         )
     }
 
     private fun uploadImage(file: File) {
-        Log.d("ScanFragment", "Uploading image: ${file.absolutePath}")
+        progressIndicator.visibility = View.VISIBLE
         val reducedFile = file.reduceFileImage()
 
         Log.d("ScanFragment", "Image reduced to: ${reducedFile.length()} bytes")
@@ -227,10 +222,11 @@ class ScanFragment : Fragment() {
 
         ApiClient.apiService.postPrediction(part).enqueue(object : Callback<PredictResponse> {
             override fun onResponse(call: Call<PredictResponse>, response: Response<PredictResponse>) {
+
+                progressIndicator.visibility = View.GONE
+
                 if (response.isSuccessful) {
                     val predictionResult = response.body()?.data?.result
-                    Log.d("ScanFragment", "Prediction Result: $predictionResult")
-                    Toast.makeText(requireContext(), "Prediction: $predictionResult", Toast.LENGTH_LONG).show()
 
                     val targetFragment = when (predictionResult) {
                         "battery", "biological", "trash" -> NoCraftFragment()
@@ -282,8 +278,6 @@ class ScanFragment : Fragment() {
                 ContextCompat.getMainExecutor(context),
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Log.d("ScanFragment", "Image saved to MediaStore: $imageUri")
-                        Toast.makeText(context, "Image saved to MediaStore", Toast.LENGTH_SHORT).show()
 
                         // Step 5: Force a media scan after saving the image
                         context.sendBroadcast(
@@ -292,15 +286,12 @@ class ScanFragment : Fragment() {
                     }
 
                     override fun onError(exception: ImageCaptureException) {
-                        Log.e("ScanFragment", "Error saving image", exception)
-                        Toast.makeText(context, "Failed to save image: ${exception.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Gagal menyimpan gambar: ${exception.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             )
         } else {
-            // Step 6: Handle failure in inserting into MediaStore
-            Log.e("ScanFragment", "Failed to create image URI in MediaStore")
-            Toast.makeText(context, "Failed to save image to MediaStore", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Gagal menyimpan gambar", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -310,8 +301,6 @@ class ScanFragment : Fragment() {
             data?.data?.let { uri ->
                 val file = File(getRealPathFromURI(uri))  // Convert URI to File
                 uploadImageFromUri(uri)
-                Log.d("ScanFragment", "Selected image URI: $uri")
-                Toast.makeText(requireContext(), "Image selected: $uri", Toast.LENGTH_SHORT).show()
 
                 // Pass the URI to com.valdo.refind.ui.ResultFragment
                 val resultFragment = ResultFragment()
