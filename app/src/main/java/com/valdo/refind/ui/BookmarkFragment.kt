@@ -84,10 +84,4 @@ class BookmarkFragment : Fragment() {
             .commit()
     }
 
-    override fun onResume() {
-        super.onResume()
-        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
-        (activity as? AppCompatActivity)?.supportActionBar?.show()
-        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
-    }
 }

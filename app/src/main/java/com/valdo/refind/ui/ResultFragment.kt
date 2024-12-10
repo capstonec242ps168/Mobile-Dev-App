@@ -52,6 +52,22 @@ class ResultFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+    }
+
     private fun openCraftFragment(endpoint: String) {
         // Open the CraftFragment, passing the predictionResult as the label
         val craftFragment = CraftFragment()

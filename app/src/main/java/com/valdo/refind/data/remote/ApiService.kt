@@ -37,4 +37,10 @@ interface ApiService {
 
     @GET("/history/{id}")
     fun getHistoryByUserId(@Path("id") id: String): Call<List<HistoryResponse>>
+
+    @GET("/news")
+    fun getNews(): Call<NewsResponse>
+
+    @GET("/news/{id}")
+    fun getNewsById(@Path("id") id: String): Call<NewsItem>
 }

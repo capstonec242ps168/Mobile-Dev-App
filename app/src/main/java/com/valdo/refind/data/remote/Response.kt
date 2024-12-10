@@ -1,5 +1,7 @@
 package com.valdo.refind.data.remote
 
+import java.io.Serializable
+
 // Generic API responses
 data class TrashesResponse(
     val status: String,
@@ -67,3 +69,15 @@ data class HistoryResponse(
     val date: String,
     val action: String
 )
+
+data class NewsResponse(
+    val status: String,
+    val result: List<NewsItem>
+)
+
+data class NewsItem(
+    val id: Int,
+    val title: String,
+    val content: String,
+    val image: String
+) : Serializable

@@ -34,6 +34,11 @@ class DetailCraftFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
+
+
         // Initialize the views
         craftImage = view.findViewById(R.id.craft_image)
         craftTitle = view.findViewById(R.id.craft_title)
@@ -56,5 +61,22 @@ class DetailCraftFragment : Fragment() {
         } else {
             craftImage.setImageResource(R.drawable.protecting_the_environment) // Replace with your placeholder image
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+
     }
 }

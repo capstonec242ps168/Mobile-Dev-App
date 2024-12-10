@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
+    android:layout_marginStart="16dp"
     android:layout_marginTop="4dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginEnd="16dp"
+    app:cardBackgroundColor="@color/secondaryGreen"
     android:layout_marginBottom="4dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
@@ -15,33 +16,48 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_gravity="center_vertical"
+        android:padding="6dp">
 
         <ImageView
             android:id="@+id/newsPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
             android:contentDescription="@string/card_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
+        <!-- Semi-transparent container for the background -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/semiTransparentContainer"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:background="#CC000000"
+            android:alpha="0.8"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/newsPhoto"
+            app:layout_constraintStart_toStartOf="@id/newsPhoto"
+            app:layout_constraintEnd_toEndOf="@id/newsPhoto" />
+
         <TextView
             android:id="@+id/eventName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_toEndOf="@id/newsPhoto"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@string/news_title"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/newsPhoto"
-            android:text="@string/news_title"/>
+            app:layout_constraintStart_toStartOf="@id/semiTransparentContainer"
+            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer"
+            app:layout_constraintBottom_toBottomOf="@id/semiTransparentContainer"
+            app:layout_constraintEnd_toEndOf="@id/semiTransparentContainer" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

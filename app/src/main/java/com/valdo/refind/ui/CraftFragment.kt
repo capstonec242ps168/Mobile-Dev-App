@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,6 +55,14 @@ class CraftFragment : Fragment() {
         fetchCrafts(label)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
+    }
+
     private fun addToBookmarks(craft: CraftResponse) {
         BookmarkRepository.addCraftToBookmarks(
             craft,
@@ -71,11 +80,16 @@ class CraftFragment : Fragment() {
     private fun fetchCrafts(label: String) {
         // Now the full URL path will be handled in the API client
         val call = ApiClient.apiService.getCraftsByLabel(label)
+        val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar)
+
+        progressBar?.visibility = View.VISIBLE
 
         Log.d(TAG, "Calling API for crafts with label: $label")
 
         call.enqueue(object : Callback<CraftsResponse> {
             override fun onResponse(call: Call<CraftsResponse>, response: Response<CraftsResponse>) {
+                progressBar?.visibility = View.GONE
+
                 Log.d("API Response", "Response code: ${response.code()}")
                 Log.d("API Response", "Response body: ${response.body()}")
                 Log.d("API Response", "Raw response: ${response.raw()}")

@@ -93,7 +93,6 @@ class ScanFragment : Fragment() {
         activity?.supportActionBar?.apply {
             show() // Make sure the ActionBar is visible
             setDisplayHomeAsUpEnabled(true) // Show the back button
-            setDisplayShowTitleEnabled(false) // Hide the title
         }
 
         // Optionally hide other views like Bottom Navigation, FAB, etc.
@@ -234,7 +233,7 @@ class ScanFragment : Fragment() {
                     Toast.makeText(requireContext(), "Prediction: $predictionResult", Toast.LENGTH_LONG).show()
 
                     val targetFragment = when (predictionResult) {
-                        "battery", "biological", "trashes" -> NoCraftFragment()
+                        "battery", "biological", "trash" -> NoCraftFragment()
                         else -> ResultFragment()
                     }
 

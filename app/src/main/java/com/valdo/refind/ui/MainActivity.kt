@@ -65,8 +65,17 @@ class MainActivity : AppCompatActivity() {
                 is BookmarkFragment -> "Bookmarks"
                 is SettingFragment -> "Settings"
                 is AboutFragment -> "About us"
-                is CraftFragment -> "Craft"
-                is DetailCraftFragment -> "Detail Craft"
+                is CraftFragment -> "Crafts"
+                is ScanFragment -> "Scan"
+                is ResultFragment -> "Result"
+                is NoCraftFragment -> {
+                    // Check if the flag is passed in the arguments
+                    if (fragment.arguments?.getBoolean("isCraft") == true) {
+                        "Crafts"  // Show "Crafts" if the flag is true
+                    } else {
+                        "Result"  // Show "Result" by default
+                    }
+                }
                 else -> getString(R.string.app_name)
             }
             supportActionBar?.title = title

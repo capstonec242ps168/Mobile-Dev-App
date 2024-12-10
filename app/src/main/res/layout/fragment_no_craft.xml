@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui." >
 
     <LinearLayout
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="Sayangnya barang tersebut mengandung bahan berbahaya untuk diolah"
             />
 
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text=" Pastikan barang tersebut dibuang dengan aman, seperti membungkusnya rapat dalam kantong plastik dan membuangnya ke tempat sampah biasa"
             />
 
