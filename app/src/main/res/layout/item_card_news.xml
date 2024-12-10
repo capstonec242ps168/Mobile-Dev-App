@@ -45,18 +45,19 @@
             android:id="@+id/eventName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
             android:maxLines="1"
             android:text="@string/news_title"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/semiTransparentContainer"
-            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer"
             app:layout_constraintBottom_toBottomOf="@id/semiTransparentContainer"
-            app:layout_constraintEnd_toEndOf="@id/semiTransparentContainer" />
+            app:layout_constraintEnd_toEndOf="@id/semiTransparentContainer"
+            app:layout_constraintStart_toStartOf="@id/semiTransparentContainer"
+            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

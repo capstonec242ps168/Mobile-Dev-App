@@ -2,14 +2,13 @@ package com.valdo.refind.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.valdo.refind.R
 import com.valdo.refind.adapter.ListCraftAdapter
 import com.valdo.refind.data.remote.CraftResponse
@@ -34,13 +33,14 @@ class BookmarkFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewBookmark)
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = ListCraftAdapter(
+            requireContext(),
             onItemClick = { craft -> openDetailCraftFragment(craft) },
             onBookmarkClick = { craft -> removeFromBookmarks(craft) }
         )
+
         recyclerView.adapter = adapter
 
         loadBookmarks()
-
     }
 
     private fun loadBookmarks() {
@@ -49,7 +49,14 @@ class BookmarkFragment : Fragment() {
                 adapter.setCrafts(bookmarks)
             },
             onFailure = { e ->
-                Toast.makeText(requireContext(), "Error loading bookmarks: ${e.message}", Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(
+                    requireView(),
+                    "Error loading bookmarks: ${e.message}",
+                    Snackbar.LENGTH_SHORT
+                )
+                // Adjust position for the error snackbar
+                adjustSnackbarPosition(snackbar)
+                snackbar.show()
             }
         )
     }
@@ -58,13 +65,34 @@ class BookmarkFragment : Fragment() {
         BookmarkRepository.removeCraftFromBookmarks(
             craft,
             onSuccess = {
-                Toast.makeText(requireContext(), "${craft.Crafts?.name} removed from bookmarks!", Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(
+                    requireView(),
+                    "${craft.Crafts?.name} removed from bookmarks!",
+                    Snackbar.LENGTH_SHORT
+                )
+                // Adjust position for the success snackbar
+                adjustSnackbarPosition(snackbar)
+                snackbar.show()
                 loadBookmarks() // Refresh the bookmark list
             },
             onFailure = { e ->
-                Toast.makeText(requireContext(), "Error removing bookmark: ${e.message}", Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(
+                    requireView(),
+                    "Error removing bookmark: ${e.message}",
+                    Snackbar.LENGTH_SHORT
+                )
+                // Adjust position for the error snackbar
+                adjustSnackbarPosition(snackbar)
+                snackbar.show()
             }
         )
+    }
+
+    private fun adjustSnackbarPosition(snackbar: Snackbar) {
+        val snackbarView = snackbar.view
+        val params = snackbarView.layoutParams as FrameLayout.LayoutParams
+        params.bottomMargin = 200 // Adjust this value to control how high the Snackbar appears
+        snackbarView.layoutParams = params
     }
 
     private fun openDetailCraftFragment(craft: CraftResponse) {
@@ -83,5 +111,5 @@ class BookmarkFragment : Fragment() {
             .addToBackStack("DetailCraftFragment")
             .commit()
     }
-
 }
+

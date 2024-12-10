@@ -21,24 +21,26 @@
 
         <TextView
             android:id="@+id/result_text"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:fontFamily="@font/roboto_regular"
             android:gravity="center"
+            android:text="Barang yang dapat diolah menjadi kerajinan : "
             android:textColor="@color/black"
-            android:text="Barang yang dapat diolah menjadi kerajinan : " />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_craft_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="64dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/primaryGreen"
+            android:fontFamily="@font/roboto_bold"
             android:gravity="center"
             android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="64dp"
             android:text="@string/craft_list"
             android:textColor="@android:color/white"
             android:textSize="16sp"

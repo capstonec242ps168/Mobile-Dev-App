@@ -25,13 +25,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="18dp"
+                android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="30dp"
-                android:text="@string/dummy"
+                android:text="@string/about_content"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

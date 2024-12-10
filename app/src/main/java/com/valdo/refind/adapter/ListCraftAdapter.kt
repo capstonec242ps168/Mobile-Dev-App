@@ -1,10 +1,12 @@
 package com.valdo.refind.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +15,19 @@ import com.valdo.refind.R
 import com.valdo.refind.data.remote.CraftResponse
 
 class ListCraftAdapter(
+    private val context: Context,
     private val onItemClick: (CraftResponse) -> Unit,
-    private val onBookmarkClick: (CraftResponse) -> Unit)
-    : RecyclerView.Adapter<ListCraftAdapter.CraftViewHolder>() {
+    private val onBookmarkClick: (CraftResponse) -> Unit
+) : RecyclerView.Adapter<ListCraftAdapter.CraftViewHolder>() {
 
     private var craftList: List<CraftResponse> = emptyList()
+    private val bookmarkedItems = mutableSetOf<Int>()
+
+    private val sharedPreferences = context.getSharedPreferences("bookmarks_prefs", Context.MODE_PRIVATE)
+
+    init {
+        loadBookmarkedItems()
+    }
 
     fun setCrafts(crafts: List<CraftResponse>) {
         craftList = crafts
@@ -41,23 +51,61 @@ class ListCraftAdapter(
     inner class CraftViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val craftTitle: TextView = itemView.findViewById(R.id.craftTitle)
         private val craftImage: ImageView = itemView.findViewById(R.id.craftPhoto)
-        private val btnBookmark: Button = itemView.findViewById(R.id.btnBookmark)
+        private val btnBookmark: ImageButton = itemView.findViewById(R.id.btnBookmark)
 
         fun bind(craft: CraftResponse) {
+            // Set the craft title
             craftTitle.text = craft.Crafts?.name
+
+            // Load the craft image using Glide
             if (!craft.Crafts?.image.isNullOrEmpty()) {
                 Glide.with(itemView.context)
                     .load(craft.Crafts?.image)
                     .into(craftImage)
             }
 
+            // Set the bookmark icon based on the bookmark state
+            btnBookmark.setImageResource(
+                if (bookmarkedItems.contains(craft.craft_id)) {
+                    R.drawable.baseline_bookmark_24
+                } else {
+                    R.drawable.baseline_bookmark_border_24
+                }
+            )
+
+            // Handle item click
             itemView.setOnClickListener {
-                onItemClick(craft)  // Pass the full CraftResponse object
+                onItemClick(craft)
             }
 
+            // Handle bookmark button click
             btnBookmark.setOnClickListener {
-                onBookmarkClick(craft) // Call the bookmark callback
+                if (bookmarkedItems.contains(craft.craft_id)) {
+                    bookmarkedItems.remove(craft.craft_id)
+                    btnBookmark.setImageResource(R.drawable.baseline_bookmark_border_24)  // Bookmark removed
+                } else {
+                    bookmarkedItems.add(craft.craft_id)
+                    btnBookmark.setImageResource(R.drawable.baseline_bookmark_24)  // Bookmark added
+                }
+                saveBookmarkedItems()
+                onBookmarkClick(craft)
             }
         }
     }
+
+    // Save bookmark states to SharedPreferences
+    private fun saveBookmarkedItems() {
+        with(sharedPreferences.edit()) {
+            putStringSet("bookmarked_items", bookmarkedItems.map { it.toString() }.toSet())
+            apply()
+        }
+    }
+
+    // Load bookmark states from SharedPreferences
+    private fun loadBookmarkedItems() {
+        val savedBookmarks = sharedPreferences.getStringSet("bookmarked_items", emptySet())
+        bookmarkedItems.clear()
+        bookmarkedItems.addAll(savedBookmarks?.map { it.toInt() } ?: emptySet())
+    }
 }
+

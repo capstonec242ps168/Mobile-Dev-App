@@ -21,27 +21,27 @@
 
         <TextView
             android:id="@+id/warning"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:textColor="@color/black"
             android:text="Sayangnya barang tersebut mengandung bahan berbahaya untuk diolah"
-            />
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/treatment"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:textColor="@color/black"
             android:text=" Pastikan barang tersebut dibuang dengan aman, seperti membungkusnya rapat dalam kantong plastik dan membuangnya ke tempat sampah biasa"
-            />
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

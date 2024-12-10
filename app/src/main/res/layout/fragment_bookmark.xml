@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:paddingBottom="50dp"
     tools:context=".ui.BookmarkFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="70dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ProgressBar
             android:id="@+id/progressBar"

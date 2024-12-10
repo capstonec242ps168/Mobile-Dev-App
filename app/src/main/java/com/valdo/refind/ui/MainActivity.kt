@@ -16,6 +16,8 @@ import com.valdo.refind.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var isBookmarked = false // Track the bookmark state
+    private var isHome = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +41,14 @@ class MainActivity : AppCompatActivity() {
         // Bottom navigation listener
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_home -> openFragment(HomeFragment())
-                R.id.bottom_bookmark -> openFragment(BookmarkFragment())
+                R.id.bottom_home -> {
+                    toggleHomeIcon(item)
+                    openFragment(HomeFragment())
+                }
+                R.id.bottom_bookmark -> {
+                    toggleBookmarkIcon(item)
+                    openFragment(BookmarkFragment())
+                }
             }
             true
         }
@@ -79,6 +87,45 @@ class MainActivity : AppCompatActivity() {
                 else -> getString(R.string.app_name)
             }
             supportActionBar?.title = title
+        }
+    }
+
+    // Function to toggle the bookmark icon
+    private fun toggleBookmarkIcon(item: android.view.MenuItem) {
+        isBookmarked = !isBookmarked
+        val newIcon = if (isBookmarked) {
+            R.drawable.baseline_bookmark_24 // Filled bookmark icon
+        } else {
+            R.drawable.baseline_bookmark_border_24 // Border bookmark icon
+        }
+        item.setIcon(newIcon)
+    }
+
+    private fun toggleHomeIcon(item: android.view.MenuItem) {
+        isHome = !isHome
+        val newIcon = if (isHome) {
+            R.drawable.baseline_home_24 // Filled bookmark icon
+        } else {
+            R.drawable.outline_home_24 // Border bookmark icon
+        }
+        item.setIcon(newIcon)
+    }
+
+    private fun updateHomeIcon(fragment: Fragment) {
+        val homeItem = binding.bottomNavigation.menu.findItem(R.id.bottom_home)
+        if (fragment is HomeFragment) {
+            homeItem.setIcon(R.drawable.baseline_home_24) // Filled home icon
+        } else {
+            homeItem.setIcon(R.drawable.outline_home_24) // Outline home icon
+        }
+    }
+
+    private fun updateBookmarkIcon(fragment: Fragment) {
+        val bookmarkItem = binding.bottomNavigation.menu.findItem(R.id.bottom_bookmark)
+        if (fragment is BookmarkFragment) {
+            bookmarkItem.setIcon(R.drawable.baseline_bookmark_24) // Filled home icon
+        } else {
+            bookmarkItem.setIcon(R.drawable.baseline_bookmark_border_24) // Outline home icon
         }
     }
 
@@ -149,6 +196,8 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         updateToolbar(fragment)
+        updateHomeIcon(fragment)
+        updateBookmarkIcon(fragment)
     }
 
     private fun updateToolbar(fragment: Fragment) {

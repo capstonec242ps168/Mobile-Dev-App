@@ -34,12 +34,12 @@
             android:id="@+id/semiTransparentContainer"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#CC000000"
             android:alpha="0.8"
+            android:background="#CC000000"
             android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Craft title -->
         <TextView
@@ -48,28 +48,31 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:textColor="@color/white"
             android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
             android:maxLines="1"
             android:text="@string/craft"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/semiTransparentContainer"
-            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer"
             app:layout_constraintBottom_toBottomOf="@id/semiTransparentContainer"
-            app:layout_constraintEnd_toStartOf="@id/btnBookmark"/>
+            app:layout_constraintEnd_toStartOf="@id/btnBookmark"
+            app:layout_constraintStart_toStartOf="@id/semiTransparentContainer"
+            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer" />
 
 
         <!-- Bookmark button -->
-        <Button
+        <ImageButton
             android:id="@+id/btnBookmark"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@drawable/baseline_bookmark_border_24"
             android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/baseline_bookmark_border_24"
+            app:layout_constraintBottom_toBottomOf="@id/semiTransparentContainer"
             app:layout_constraintEnd_toEndOf="@id/semiTransparentContainer"
-            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer"
-            app:layout_constraintBottom_toBottomOf="@id/semiTransparentContainer" />
+            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

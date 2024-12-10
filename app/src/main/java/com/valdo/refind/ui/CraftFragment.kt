@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.valdo.refind.R
 import com.valdo.refind.adapter.ListCraftAdapter
 import com.valdo.refind.data.remote.ApiClient
@@ -43,11 +44,11 @@ class CraftFragment : Fragment() {
         // Initialize RecyclerView and adapter
         recyclerView = view.findViewById(R.id.recyclerViewCrafts)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = ListCraftAdapter(onItemClick = { craft ->
-            openDetailCraftFragment(craft)
-        },onBookmarkClick = { craft ->
-            addToBookmarks(craft) // Function to add the craft to bookmarks
-        })
+        adapter = ListCraftAdapter(
+            requireContext(),
+            onItemClick = { craft -> openDetailCraftFragment(craft) },
+            onBookmarkClick = { craft -> addToBookmarks(craft) }
+        )
         recyclerView.adapter = adapter
 
         // Retrieve label from arguments
@@ -67,15 +68,34 @@ class CraftFragment : Fragment() {
         BookmarkRepository.addCraftToBookmarks(
             craft,
             onSuccess = {
-                Toast.makeText(requireContext(), "${craft.Crafts?.name} added to bookmarks!", Toast.LENGTH_SHORT).show()
+                // Show Snackbar with custom position
+                val snackbar = Snackbar.make(
+                    requireView(),
+                    "${craft.Crafts?.name} added to bookmarks!",
+                    Snackbar.LENGTH_SHORT
+                )
+
+                // Get the Snackbar's view
+                val snackbarView = snackbar.view
+
+                // Adjust the layout parameters to move it higher
+                val params = snackbarView.layoutParams as FrameLayout.LayoutParams
+                params.bottomMargin = 200  // Adjust this value to control how high the Snackbar appears
+                snackbarView.layoutParams = params
+
+                snackbar.show()
             },
             onFailure = { e ->
                 Log.e("CraftFragment", "Error adding bookmark: ${e.message}", e)
-                Toast.makeText(requireContext(), "Error adding bookmark: ${e.message}", Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(
+                    requireView(),
+                    "Error adding bookmark: ${e.message}",
+                    Snackbar.LENGTH_SHORT
+                )
+                snackbar.show()
             }
         )
     }
-
 
     private fun fetchCrafts(label: String) {
         // Now the full URL path will be handled in the API client
@@ -135,8 +155,6 @@ class CraftFragment : Fragment() {
             .commit()
     }
 
-
-
     override fun onDestroy() {
         super.onDestroy()
 
@@ -145,3 +163,4 @@ class CraftFragment : Fragment() {
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
     }
 }
+
