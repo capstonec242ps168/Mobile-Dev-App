@@ -62,18 +62,20 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             val title = when (fragment) {
-                is BookmarkFragment -> "Bookmarks"
-                is SettingFragment -> "Settings"
-                is AboutFragment -> "About us"
-                is CraftFragment -> "Crafts"
-                is ScanFragment -> "Scan"
-                is ResultFragment -> "Result"
+                is BookmarkFragment -> "Tersimpan"
+                is SettingFragment -> "Pengaturan"
+                is AboutFragment -> "Tentang Kita"
+                is CraftFragment -> "Daftar Kerajinan"
+                is ScanFragment -> "Pemindai"
+                is ResultFragment -> "Hasil"
+                is DetailNewsFragment -> "Berita"
+                is DetailCraftFragment -> "Kerajinan"
                 is NoCraftFragment -> {
                     // Check if the flag is passed in the arguments
                     if (fragment.arguments?.getBoolean("isCraft") == true) {
-                        "Crafts"  // Show "Crafts" if the flag is true
+                        "Kerajinan"  // Show "Crafts" if the flag is true
                     } else {
-                        "Result"  // Show "Result" by default
+                        "Hasil"  // Show "Result" by default
                     }
                 }
                 else -> getString(R.string.app_name)

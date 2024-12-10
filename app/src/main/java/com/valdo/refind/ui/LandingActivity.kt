@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.valdo.refind.BuildConfig
 import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityLandingBinding
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ class LandingActivity : AppCompatActivity() {
         val credentialManager = CredentialManager.create(this)
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
-            .setServerClientId(getString(R.string.client_id))
+            .setServerClientId(BuildConfig.CLIENT_ID)
             .build()
 
         val request = GetCredentialRequest.Builder()
