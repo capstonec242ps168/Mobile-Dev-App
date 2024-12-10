@@ -9,12 +9,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import android.Manifest
+import android.content.Context
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityMainBinding
-import com.valdo.refind.ui.MainActivity.Companion.CameraX_Permissions
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -57,6 +55,9 @@ class MainActivity : AppCompatActivity() {
             openFragment(ScanFragment())
         }
 
+        // Update FAB based on permission status
+        updateFAB()
+
         // Listen for back stack changes to update toolbar title
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
@@ -64,10 +65,21 @@ class MainActivity : AppCompatActivity() {
                 is BookmarkFragment -> "Bookmarks"
                 is SettingFragment -> "Settings"
                 is AboutFragment -> "About us"
+                is CraftFragment -> "Craft"
+                is DetailCraftFragment -> "Detail Craft"
                 else -> getString(R.string.app_name)
             }
             supportActionBar?.title = title
         }
+    }
+
+    fun enableFAB(enable: Boolean) {
+        binding.fab.isEnabled = enable
+    }
+
+    private fun updateFAB() {
+        // Always enable the FAB regardless of permission status
+        binding.fab.isEnabled = true
     }
 
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
@@ -151,11 +163,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Handle the result of the permission request
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 0) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed with camera usage
+                // Simpan status izin ke SharedPreferences
+                val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                sharedPreferences.edit().putBoolean("camera_permission", true).apply()
+                updateFAB()
+                // Beri tahu pengguna bahwa izin telah diberikan
+                Toast.makeText(this, "Camera permission granted!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }

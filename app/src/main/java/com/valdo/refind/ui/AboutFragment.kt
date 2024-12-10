@@ -45,12 +45,4 @@ class AboutFragment : Fragment() {
         // Remove specific menu items by ID
         menu.findItem(R.id.action_settings)?.isVisible = false
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
-        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
-        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
-    }
 }

@@ -9,14 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.valdo.refind.R
 import com.valdo.refind.adapter.ListCraftAdapter
 import com.valdo.refind.data.remote.ApiClient
-import com.valdo.refind.data.remote.BookmarkRequest
-import com.valdo.refind.data.remote.BookmarkResponse
 import com.valdo.refind.data.remote.CraftResponse
 import com.valdo.refind.data.remote.CraftsResponse
+import com.valdo.refind.helper.BookmarkRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

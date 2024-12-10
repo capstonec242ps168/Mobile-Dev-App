@@ -1,6 +1,5 @@
-package com.valdo.refind.ui
+package com.valdo.refind.helper
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.valdo.refind.data.remote.CraftDetails

@@ -1,6 +1,10 @@
 package com.valdo.refind.ui
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +15,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
 import com.valdo.refind.R
 import com.valdo.refind.databinding.FragmentSettingBinding
+import com.valdo.refind.helper.hasRequiredPermissions
 
 class SettingFragment : Fragment() {
 
@@ -21,6 +27,9 @@ class SettingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var cameraSwitch: SwitchMaterial
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +42,11 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        cameraSwitch = binding.cameraSwitch
+
+        setupCameraSwitch()
 
         auth = FirebaseAuth.getInstance()
 
@@ -79,6 +93,46 @@ class SettingFragment : Fragment() {
         }
     }
 
+    private fun setupCameraSwitch() {
+        val isCameraAllowed = sharedPreferences.getBoolean("camera_permission", false)
+
+        if (isCameraAllowed || requireContext().hasRequiredPermissions()) {
+            cameraSwitch.isChecked = true
+            cameraSwitch.isEnabled = false
+            (activity as? MainActivity)?.enableFAB(true) // Mengaktifkan FAB
+            Toast.makeText(context, "You have allowed camera access. Enjoy!", Toast.LENGTH_SHORT).show()
+        } else {
+            cameraSwitch.isChecked = false
+            cameraSwitch.isEnabled = true
+        }
+
+        cameraSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                requestCameraPermission()
+            }
+        }
+    }
+
+    private fun requestCameraPermission() {
+        requestPermissions(arrayOf(Manifest.permission.CAMERA), 0)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sharedPreferences.edit().putBoolean("camera_permission", true).apply()
+                cameraSwitch.isChecked = true
+                cameraSwitch.isEnabled = false
+                (activity as? MainActivity)?.enableFAB(true) // Mengaktifkan FAB setelah izin diberikan
+                Toast.makeText(context, "Camera access granted!", Toast.LENGTH_SHORT).show()
+            } else {
+                cameraSwitch.isChecked = false
+                Toast.makeText(context, "Camera permission denied!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -89,7 +143,6 @@ class SettingFragment : Fragment() {
 
     private fun logoutUser() {
         auth.signOut() // Sign out from Firebase
-//        BookmarkRepository.clearBookmarksForUser()
         val intent = Intent(requireActivity(), LandingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

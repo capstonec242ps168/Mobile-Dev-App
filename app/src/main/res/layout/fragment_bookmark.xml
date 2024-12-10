@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="70dp">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -31,10 +32,5 @@
             tools:listitem="@layout/item_card_craft" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ini bookmark"/>
 
 </FrameLayout>

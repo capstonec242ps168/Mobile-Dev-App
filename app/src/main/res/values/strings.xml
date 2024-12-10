@@ -13,7 +13,7 @@
     <string name="about">Tentang kami</string>
     <string name="news_title">Judul Berita</string>
     <string name="news_content">Isi Berita</string>
-    <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique eros vel enim volutpat porta. Vivamus nec condimentum ipsum. Duis lacinia, augue et pellentesque scelerisque, ex nisi aliquet lacus, at egestas tortor mauris vel eros. Donec laoreet faucibus ullamcorper. Aliquam pretium sed purus vel ornare. Etiam ut elit semper, ornare felis a, dictum quam. Suspendisse non leo vel orci commodo accumsan. Praesent vehicula tellus quis sollicitudin ultrices.</string>
+    <string name="dummy">Refind adalah aplikasi yang membantu mengatasi masalah lingkungan dengan mendaur ulang sampah secara cepat dan efisien. Melalui fitur pendeteksian gambar, aplikasi ini memungkinkan pengguna mengidentifikasi jenis sampah dan mendapatkan saran cara memilahnya.\n\nSelain mempermudah proses daur ulang, Refind juga berperan sebagai sarana edukasi untuk meningkatkan kesadaran masyarakat akan pentingnya pengelolaan sampah dan keberlanjutan lingkungan. Dengan adanya Refind, masyarakat dapat mengolah sampah menjadi berbagai kerajinan tangan yang bernilai jual, sehingga dapat meningkatkan pendapatan dan mengembangkan usaha mikro, kecil, dan menengah (UMKM).</string>
     <string name="craft_title">Nama Kerajinan</string>
     <string name="email_hint">Enter your email</string>
     <string name="use_correct_email_format">Use correct email format</string>

@@ -2,6 +2,7 @@ package com.valdo.refind.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.valdo.refind.R
 import com.valdo.refind.adapter.ListCraftAdapter
 import com.valdo.refind.data.remote.CraftResponse
+import com.valdo.refind.helper.BookmarkRepository
 
 class BookmarkFragment : Fragment() {
 
@@ -27,6 +29,7 @@ class BookmarkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
 
         recyclerView = view.findViewById(R.id.recyclerViewBookmark)
         recyclerView.layoutManager = LinearLayoutManager(context)
