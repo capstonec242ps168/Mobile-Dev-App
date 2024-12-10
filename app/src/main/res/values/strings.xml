@@ -60,4 +60,8 @@
     <string name="log_out">Keluar</string>
     <string name="client_id">70793757615-4fmg3mbvt3v77ek27vq312l2m889o03m.apps.googleusercontent.com</string>
     <string name="craft_list">ide kerajinan</string>
+    <string name="warning_bio">Sampah organik tidak dapat diolah menjadi kerajinan, sebaiknya diperlakukan dengan hati-hati</string>
+    <string name="treatment_bio">Pertimbangkan untuk mengolahnya menjadi pupuk kompos, atau buang dengan cara yang aman</string>
+    <string name="warning_no_craft">Sayangnya barang tersebut mengandung bahan berbahaya untuk diolah</string>
+    <string name="treatment_no_craft">Pastikan barang tersebut dibuang dengan aman, seperti membungkusnya rapat dalam kantong plastik dan membuangnya ke tempat sampah</string>
 </resources>

@@ -12,8 +12,9 @@ import com.bumptech.glide.Glide
 import com.valdo.refind.R
 import com.valdo.refind.data.remote.CraftResponse
 
-class ListCraftAdapter(private val onItemClick: (CraftResponse) -> Unit,
-                       private val onBookmarkClick: (CraftResponse) -> Unit)
+class ListCraftAdapter(
+    private val onItemClick: (CraftResponse) -> Unit,
+    private val onBookmarkClick: (CraftResponse) -> Unit)
     : RecyclerView.Adapter<ListCraftAdapter.CraftViewHolder>() {
 
     private var craftList: List<CraftResponse> = emptyList()
