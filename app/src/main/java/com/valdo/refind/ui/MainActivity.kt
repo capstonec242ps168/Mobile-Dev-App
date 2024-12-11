@@ -61,16 +61,13 @@ class MainActivity : AppCompatActivity() {
             openFragment(ScanFragment())
         }
 
-        // Update FAB based on permission status
-        updateFAB()
-
         // Listen for back stack changes to update toolbar title
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             val title = when (fragment) {
                 is BookmarkFragment -> "Tersimpan"
                 is SettingFragment -> "Pengaturan"
-                is AboutFragment -> "Tentang Kita"
+                is AboutFragment -> "Tentang"
                 is CraftFragment -> "Daftar Kerajinan"
                 is ScanFragment -> "Pemindai"
                 is ResultFragment -> "Hasil"
@@ -110,11 +107,6 @@ class MainActivity : AppCompatActivity() {
 
     fun enableFAB(enable: Boolean) {
         binding.fab.isEnabled = enable
-    }
-
-    private fun updateFAB() {
-        // Always enable the FAB regardless of permission status
-        binding.fab.isEnabled = true
     }
 
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
@@ -211,7 +203,6 @@ class MainActivity : AppCompatActivity() {
                 // Simpan status izin ke SharedPreferences
                 val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 sharedPreferences.edit().putBoolean("camera_permission", true).apply()
-                updateFAB()
                 // Beri tahu pengguna bahwa izin telah diberikan
                 Toast.makeText(this, "Izin kamera diizinkan!", Toast.LENGTH_SHORT).show()
             } else {

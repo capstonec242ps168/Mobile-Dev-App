@@ -60,21 +60,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     implementation ("com.google.guava:guava:32.0.1-jre")
 
-//    GLIDE
+    // GLIDE
     implementation(libs.glide)
 
-//    NAVIGATION
+    // NAVIGATION
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-//    VIEW PAGER2
+    // VIEW PAGER2
     implementation(libs.androidx.viewpager2)
 
     // Camera
-
     val camerax_version = "1.4.0"
 
     implementation("androidx.camera:camera-core:1.4.0")
@@ -93,19 +91,11 @@ dependencies {
 
     // OkHttp for file uploads
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
-
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.google.code.gson:gson:2.8.8")
-
-
-//    implementation ("com.google.firebase:firebase-firestore:25.1.1")
     implementation(libs.play.services.auth)
     implementation(libs.androidx.credentials)
 
-    // optional - needed for credentials support from play services, for devices running
     // Android 13 and below.
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
