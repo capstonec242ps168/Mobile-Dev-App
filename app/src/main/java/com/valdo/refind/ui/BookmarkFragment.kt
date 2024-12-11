@@ -33,8 +33,10 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
+        // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewBookmark)
         recyclerView.layoutManager = LinearLayoutManager(context)
+
         adapter = ListCraftAdapter(
             requireContext(),
             onItemClick = { craft, imageView, titleView -> openDetailCraftFragment(craft, imageView, titleView) },
@@ -43,6 +45,7 @@ class BookmarkFragment : Fragment() {
 
         recyclerView.adapter = adapter
 
+        // Load the bookmarked items
         loadBookmarks()
     }
 
@@ -65,18 +68,19 @@ class BookmarkFragment : Fragment() {
     }
 
     private fun removeFromBookmarks(craft: CraftResponse) {
-        BookmarkRepository.removeCraftFromBookmarks(
+        BookmarkRepository.toggleBookmark(
             craft,
-            onSuccess = {
-                val snackbar = Snackbar.make(
-                    requireView(),
-                    "${craft.Crafts?.name} dihapus!",
-                    Snackbar.LENGTH_SHORT
-                )
-                // Adjust position for the success snackbar
-                adjustSnackbarPosition(snackbar)
-                snackbar.show()
-                loadBookmarks() // Refresh the bookmark list
+            onSuccess = { isAdded ->
+                if (!isAdded) {
+                    val snackbar = Snackbar.make(
+                        requireView(),
+                        "${craft.Crafts?.name} dihapus dari bookmark!",
+                        Snackbar.LENGTH_SHORT
+                    )
+                    adjustSnackbarPosition(snackbar)
+                    snackbar.show()
+                    loadBookmarks() // Refresh the list after removal
+                }
             },
             onFailure = { e ->
                 val snackbar = Snackbar.make(
@@ -84,7 +88,6 @@ class BookmarkFragment : Fragment() {
                     "Terjadi kesalahan saat menghapus: ${e.message}",
                     Snackbar.LENGTH_SHORT
                 )
-                // Adjust position for the error snackbar
                 adjustSnackbarPosition(snackbar)
                 snackbar.show()
             }
@@ -94,7 +97,7 @@ class BookmarkFragment : Fragment() {
     private fun adjustSnackbarPosition(snackbar: Snackbar) {
         val snackbarView = snackbar.view
         val params = snackbarView.layoutParams as FrameLayout.LayoutParams
-        params.bottomMargin = 200 // Adjust this value to control how high the Snackbar appears
+        params.bottomMargin = 200
         snackbarView.layoutParams = params
     }
 
@@ -121,4 +124,5 @@ class BookmarkFragment : Fragment() {
             .commit()
     }
 }
+
 

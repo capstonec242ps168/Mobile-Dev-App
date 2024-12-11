@@ -236,9 +236,9 @@ class MainActivity : AppCompatActivity() {
                 sharedPreferences.edit().putBoolean("camera_permission", true).apply()
                 updateFAB()
                 // Beri tahu pengguna bahwa izin telah diberikan
-                Toast.makeText(this, "Camera permission granted!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Izin kamera diizinkan!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Izin kamera ditolak", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -68,34 +68,35 @@ class CraftFragment : Fragment() {
     }
 
     private fun addToBookmarks(craft: CraftResponse) {
-        BookmarkRepository.addCraftToBookmarks(
+        BookmarkRepository.toggleBookmark(
             craft,
-            onSuccess = {
-                // Show Snackbar with custom position
+            onSuccess = { isAdded ->
+                val message = if (isAdded) {
+                    "${craft.Crafts?.name} tersimpan!"
+                } else {
+                    "${craft.Crafts?.name} dihapus dari bookmark!"
+                }
+
                 val snackbar = Snackbar.make(
                     requireView(),
-                    "${craft.Crafts?.name} tersimpan!",
+                    message,
                     Snackbar.LENGTH_SHORT
                 )
 
-                // Get the Snackbar's view
                 val snackbarView = snackbar.view
-
-                // Adjust the layout parameters to move it higher
                 val params = snackbarView.layoutParams as FrameLayout.LayoutParams
-                params.bottomMargin = 200  // Adjust this value to control how high the Snackbar appears
+                params.bottomMargin = 200
                 snackbarView.layoutParams = params
 
                 snackbar.show()
             },
             onFailure = { e ->
                 Log.e("CraftFragment", "Terjadi kesalahan saat menyimpan: ${e.message}", e)
-                val snackbar = Snackbar.make(
+                Snackbar.make(
                     requireView(),
-                    "Terjadi kesalahan saat menyimpan: ${e.message}",
+                    "Terjadi kesalahan: ${e.message}",
                     Snackbar.LENGTH_SHORT
-                )
-                snackbar.show()
+                ).show()
             }
         )
     }

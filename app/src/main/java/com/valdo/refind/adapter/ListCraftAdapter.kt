@@ -85,15 +85,19 @@ class ListCraftAdapter(
             // Handle bookmark button click
             btnBookmark.setOnClickListener {
                 if (bookmarkedItems.contains(craft.craft_id)) {
+                    // If already bookmarked, remove it
                     bookmarkedItems.remove(craft.craft_id)
                     btnBookmark.setImageResource(R.drawable.baseline_bookmark_border_24)  // Bookmark removed
+                    onBookmarkClick(craft)  // Notify to remove from BookmarkFragment
                 } else {
+                    // If not bookmarked, add it
                     bookmarkedItems.add(craft.craft_id)
                     btnBookmark.setImageResource(R.drawable.baseline_bookmark_24)  // Bookmark added
+                    onBookmarkClick(craft)  // Notify to add to BookmarkFragment
                 }
                 saveBookmarkedItems()
-                onBookmarkClick(craft)
             }
+
         }
     }
 
