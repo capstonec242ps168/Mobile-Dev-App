@@ -1,10 +1,13 @@
 package com.valdo.refind.ui
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +37,7 @@ class BookmarkFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = ListCraftAdapter(
             requireContext(),
-            onItemClick = { craft -> openDetailCraftFragment(craft) },
+            onItemClick = { craft, imageView, titleView -> openDetailCraftFragment(craft, imageView, titleView) },
             onBookmarkClick = { craft -> removeFromBookmarks(craft) }
         )
 
@@ -67,7 +70,7 @@ class BookmarkFragment : Fragment() {
             onSuccess = {
                 val snackbar = Snackbar.make(
                     requireView(),
-                    "${craft.Crafts?.name} removed from bookmarks!",
+                    "${craft.Crafts?.name} dihapus!",
                     Snackbar.LENGTH_SHORT
                 )
                 // Adjust position for the success snackbar
@@ -78,7 +81,7 @@ class BookmarkFragment : Fragment() {
             onFailure = { e ->
                 val snackbar = Snackbar.make(
                     requireView(),
-                    "Error removing bookmark: ${e.message}",
+                    "Terjadi kesalahan saat menghapus: ${e.message}",
                     Snackbar.LENGTH_SHORT
                 )
                 // Adjust position for the error snackbar
@@ -95,7 +98,7 @@ class BookmarkFragment : Fragment() {
         snackbarView.layoutParams = params
     }
 
-    private fun openDetailCraftFragment(craft: CraftResponse) {
+    private fun openDetailCraftFragment(craft: CraftResponse, imageView: ImageView, titleView: TextView) {
         val fragment = DetailCraftFragment()
         val bundle = Bundle().apply {
             putInt("craft_id", craft.craft_id)
@@ -106,7 +109,13 @@ class BookmarkFragment : Fragment() {
         }
         fragment.arguments = bundle
 
+        // Set up transitions
+        fragment.sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        fragment.enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
+
         parentFragmentManager.beginTransaction()
+            .addSharedElement(imageView, imageView.transitionName)
+            .addSharedElement(titleView, titleView.transitionName)
             .replace(R.id.fragment_container, fragment)
             .addToBackStack("DetailCraftFragment")
             .commit()

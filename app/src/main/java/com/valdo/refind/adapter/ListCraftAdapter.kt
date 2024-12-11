@@ -16,7 +16,7 @@ import com.valdo.refind.data.remote.CraftResponse
 
 class ListCraftAdapter(
     private val context: Context,
-    private val onItemClick: (CraftResponse) -> Unit,
+    private val onItemClick: (CraftResponse, ImageView, TextView) -> Unit,
     private val onBookmarkClick: (CraftResponse) -> Unit
 ) : RecyclerView.Adapter<ListCraftAdapter.CraftViewHolder>() {
 
@@ -73,9 +73,13 @@ class ListCraftAdapter(
                 }
             )
 
-            // Handle item click
+            // Set transition names for shared elements
+            craftImage.transitionName = "craftImageTransition_${craft.craft_id}"
+            craftTitle.transitionName = "craftTitleTransition_${craft.craft_id}"
+
+            // Handle item click and pass shared elements
             itemView.setOnClickListener {
-                onItemClick(craft)
+                onItemClick(craft, craftImage, craftTitle)
             }
 
             // Handle bookmark button click

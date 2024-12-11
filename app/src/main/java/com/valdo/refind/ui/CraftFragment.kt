@@ -1,12 +1,15 @@
 package com.valdo.refind.ui
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +49,7 @@ class CraftFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = ListCraftAdapter(
             requireContext(),
-            onItemClick = { craft -> openDetailCraftFragment(craft) },
+            onItemClick = { craft, imageView, titleView -> openDetailCraftFragment(craft, imageView, titleView) },
             onBookmarkClick = { craft -> addToBookmarks(craft) }
         )
         recyclerView.adapter = adapter
@@ -71,7 +74,7 @@ class CraftFragment : Fragment() {
                 // Show Snackbar with custom position
                 val snackbar = Snackbar.make(
                     requireView(),
-                    "${craft.Crafts?.name} added to bookmarks!",
+                    "${craft.Crafts?.name} tersimpan!",
                     Snackbar.LENGTH_SHORT
                 )
 
@@ -86,10 +89,10 @@ class CraftFragment : Fragment() {
                 snackbar.show()
             },
             onFailure = { e ->
-                Log.e("CraftFragment", "Error adding bookmark: ${e.message}", e)
+                Log.e("CraftFragment", "Terjadi kesalahan saat menyimpan: ${e.message}", e)
                 val snackbar = Snackbar.make(
                     requireView(),
-                    "Error adding bookmark: ${e.message}",
+                    "Terjadi kesalahan saat menyimpan: ${e.message}",
                     Snackbar.LENGTH_SHORT
                 )
                 snackbar.show()
@@ -137,7 +140,7 @@ class CraftFragment : Fragment() {
         })
     }
 
-    private fun openDetailCraftFragment(craft: CraftResponse) {
+    private fun openDetailCraftFragment(craft: CraftResponse, imageView: ImageView, titleView: TextView) {
         Log.d("CraftFragment", "Opening DetailCraftFragment with craft: $craft")
         val fragment = DetailCraftFragment()
         val bundle = Bundle().apply {
@@ -149,7 +152,13 @@ class CraftFragment : Fragment() {
         }
         fragment.arguments = bundle
 
+        // Set up transitions
+        fragment.sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        fragment.enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
+
         parentFragmentManager.beginTransaction()
+            .addSharedElement(imageView, imageView.transitionName)
+            .addSharedElement(titleView, titleView.transitionName)
             .replace(R.id.fragment_container, fragment)
             .addToBackStack("DetailCraftFragment")
             .commit()
