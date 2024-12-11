@@ -46,6 +46,14 @@ class BookmarkFragment : Fragment() {
         loadBookmarks()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+    }
+
     private fun loadBookmarks() {
         BookmarkRepository.getBookmarkedCrafts(
             onResult = { bookmarks ->

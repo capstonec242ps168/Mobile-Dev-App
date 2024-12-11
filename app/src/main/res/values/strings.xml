@@ -47,6 +47,8 @@
     <string name="shoe">Sepatu</string>
     <string name="glass">Kaca</string>
     <string name="biological">Organik</string>
+    <string name="battery">Baterai</string>
+    <string name="trash">Sampah berbahaya</string>
     <string name="welcome_text">Barang bekas numpuk? ayo olah jadi kerajinan!</string>
     <string name="password">Password</string>
     <string name="forgot_password_btn">Lupa Password?</string>

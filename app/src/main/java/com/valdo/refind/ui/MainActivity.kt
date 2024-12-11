@@ -42,11 +42,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_home -> {
-                    toggleHomeIcon(item)
                     openFragment(HomeFragment())
                 }
                 R.id.bottom_bookmark -> {
-                    toggleBookmarkIcon(item)
                     openFragment(BookmarkFragment())
                 }
             }
@@ -91,28 +89,7 @@ class MainActivity : AppCompatActivity() {
             supportActionBar?.title = title
         }
     }
-
-    // Function to toggle the bookmark icon
-    private fun toggleBookmarkIcon(item: android.view.MenuItem) {
-        isBookmarked = !isBookmarked
-        val newIcon = if (isBookmarked) {
-            R.drawable.baseline_bookmark_24 // Filled bookmark icon
-        } else {
-            R.drawable.baseline_bookmark_border_24 // Border bookmark icon
-        }
-        item.setIcon(newIcon)
-    }
-
-    private fun toggleHomeIcon(item: android.view.MenuItem) {
-        isHome = !isHome
-        val newIcon = if (isHome) {
-            R.drawable.baseline_home_24 // Filled bookmark icon
-        } else {
-            R.drawable.outline_home_24 // Border bookmark icon
-        }
-        item.setIcon(newIcon)
-    }
-
+    
     private fun updateHomeIcon(fragment: Fragment) {
         val homeItem = binding.bottomNavigation.menu.findItem(R.id.bottom_home)
         if (fragment is HomeFragment) {

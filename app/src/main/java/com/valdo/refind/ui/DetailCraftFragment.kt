@@ -27,6 +27,10 @@ class DetailCraftFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_craft, container, false)
     }
@@ -75,12 +79,4 @@ class DetailCraftFragment : Fragment() {
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
-        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
-        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
-
-    }
 }
