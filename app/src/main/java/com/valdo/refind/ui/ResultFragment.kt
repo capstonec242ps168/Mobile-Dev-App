@@ -27,7 +27,7 @@ class ResultFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_result, container, false)
 
         resultImage = view.findViewById(R.id.result_image)
-        resultText = view.findViewById(R.id.result_text)
+        resultText = view.findViewById(R.id.predict_result)
         craftListButton = view.findViewById(R.id.btn_craft_result)
 
         // Retrieve data from arguments

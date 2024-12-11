@@ -61,6 +61,10 @@ class DetailCraftFragment : Fragment() {
         } else {
             craftImage.setImageResource(R.drawable.protecting_the_environment) // Replace with your placeholder image
         }
+
+        // Set the transition names to match the source
+        craftImage.transitionName = "craftImageTransition_${arguments?.getInt("craft_id")}"
+        craftTitle.transitionName = "craftTitleTransition_${arguments?.getInt("craft_id")}"
     }
 
     override fun onResume() {

@@ -27,7 +27,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:transitionName="craftImageTransition"/>
 
         <!-- Semi-transparent container -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -58,7 +59,8 @@
             app:layout_constraintBottom_toBottomOf="@id/semiTransparentContainer"
             app:layout_constraintEnd_toStartOf="@id/btnBookmark"
             app:layout_constraintStart_toStartOf="@id/semiTransparentContainer"
-            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer" />
+            app:layout_constraintTop_toTopOf="@id/semiTransparentContainer"
+            android:transitionName="craftTitleTransition"/>
 
 
         <!-- Bookmark button -->

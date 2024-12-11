@@ -26,10 +26,21 @@
             android:layout_margin="16dp"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:text="Barang yang dapat diolah menjadi kerajinan : "
+            android:text="@string/result_title"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/predict_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shoe"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_regular"
+            android:textStyle="bold"
+            android:gravity="center" />
 
         <Button
             android:id="@+id/btn_craft_result"
@@ -38,7 +49,7 @@
             android:layout_marginHorizontal="64dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/primaryGreen"
-            android:fontFamily="@font/roboto_bold"
+            android:fontFamily="@font/roboto_regular"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/craft_list"

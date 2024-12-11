@@ -131,7 +131,7 @@ class HomeFragment : Fragment() {
                     val newsList = response.body()?.result ?: emptyList()
                     listNewsAdapter.updateNews(newsList) // Update adapter with fetched news
                 } else {
-                    Toast.makeText(requireContext(), "Failed to fetch news", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal mengambil berita", Toast.LENGTH_SHORT).show()
                 }
             }
 

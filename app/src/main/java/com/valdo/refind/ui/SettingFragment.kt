@@ -100,7 +100,7 @@ class SettingFragment : Fragment() {
             cameraSwitch.isChecked = true
             cameraSwitch.isEnabled = false
             (activity as? MainActivity)?.enableFAB(true) // Mengaktifkan FAB
-            Toast.makeText(context, "You have allowed camera access. Enjoy!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Anda telah mengizinkan akses kamera. Selamat menikmati!", Toast.LENGTH_SHORT).show()
         } else {
             cameraSwitch.isChecked = false
             cameraSwitch.isEnabled = true
@@ -125,10 +125,10 @@ class SettingFragment : Fragment() {
                 cameraSwitch.isChecked = true
                 cameraSwitch.isEnabled = false
                 (activity as? MainActivity)?.enableFAB(true) // Mengaktifkan FAB setelah izin diberikan
-                Toast.makeText(context, "Camera access granted!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Akses kamera diizinkan!", Toast.LENGTH_SHORT).show()
             } else {
                 cameraSwitch.isChecked = false
-                Toast.makeText(context, "Camera permission denied!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Izin kamera ditolak!", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -18,7 +18,8 @@
             android:scaleType="fitCenter"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:transitionName="craftImageTransition"/>
 
         <TextView
             android:id="@+id/craft_title"
@@ -33,7 +34,8 @@
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/craft_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:transitionName="craftTitleTransition"/>
 
         <View
             android:id="@+id/divider_line"
@@ -52,7 +54,7 @@
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/roboto_regular"
-            android:text="@string/about_refind"
+            android:text="@string/content"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
