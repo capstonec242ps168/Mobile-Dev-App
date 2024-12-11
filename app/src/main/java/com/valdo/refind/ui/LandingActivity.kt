@@ -21,7 +21,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.valdo.refind.BuildConfig
-import com.valdo.refind.R
 import com.valdo.refind.databinding.ActivityLandingBinding
 import kotlinx.coroutines.launch
 

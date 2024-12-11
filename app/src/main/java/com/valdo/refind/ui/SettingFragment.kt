@@ -65,7 +65,7 @@ class SettingFragment : Fragment() {
             // Load user photo using Glide
             Glide.with(this)
                 .load(userPhoto)
-                .placeholder(R.drawable.ic_place_holder) // Optional: Add a placeholder image
+                .placeholder(R.drawable.ic_profile_placeholder) // Optional: Add a placeholder image
                 .apply(RequestOptions.circleCropTransform()) // Make the image circular
                 .into(binding.profileImage)
         } else {

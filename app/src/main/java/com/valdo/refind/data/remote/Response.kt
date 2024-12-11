@@ -2,7 +2,6 @@ package com.valdo.refind.data.remote
 
 import java.io.Serializable
 
-// Generic API responses
 data class TrashesResponse(
     val status: String,
     val result: List<TrashResponse>
@@ -12,14 +11,6 @@ data class TrashResponse(
     val ID: Int,
     val type: String,
     val treatment: String
-)
-
-data class AuthRequest(
-    val username: String,
-    val password: String
-)
-data class AuthResponse(
-    val token: String
 )
 
 data class CraftResponse(
@@ -52,22 +43,6 @@ data class PredictResponse(
 data class PredictionData(
     val id_trash: Int,
     val result: String
-)
-
-data class BookmarkRequest(
-    val itemId: String,
-    val userId: String
-)
-
-data class BookmarkResponse(
-    val status: String,
-    val message: String
-)
-
-data class HistoryResponse(
-    val id: String,
-    val date: String,
-    val action: String
 )
 
 data class NewsResponse(

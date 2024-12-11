@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.valdo.refind.R
-import com.valdo.refind.data.remote.CraftResponse
 import com.valdo.refind.data.remote.NewsItem
-import com.valdo.refind.data.remote.NewsResponse
 
 class ListNewsAdapter(
     private var newsList: List<NewsItem>,

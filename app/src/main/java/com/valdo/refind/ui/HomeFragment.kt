@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.valdo.refind.R
 import com.valdo.refind.data.remote.ApiClient
-import com.valdo.refind.data.remote.ApiClient.apiService
 import com.valdo.refind.data.remote.ApiConfig
 import com.valdo.refind.data.remote.ApiService
 import com.valdo.refind.data.remote.NewsResponse

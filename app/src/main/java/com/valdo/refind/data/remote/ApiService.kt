@@ -4,18 +4,11 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.POST
-import retrofit2.http.Body
 import retrofit2.http.Part
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 
 interface ApiService {
-
-    @GET("/")
-    fun getHelloWorld(): Call<String>
-
-    @POST("/auth")
-    fun authenticate(@Body authRequest: AuthRequest): Call<AuthResponse>
 
     @GET("/trashes")
     fun getTrashes(): Call<TrashesResponse>
@@ -31,12 +24,6 @@ interface ApiService {
     fun postPrediction(
         @Part image: MultipartBody.Part
     ): Call<PredictResponse>
-
-    @POST("/bookmark")
-    fun addBookmark(@Body bookmarkRequest: BookmarkRequest): Call<BookmarkResponse>
-
-    @GET("/history/{id}")
-    fun getHistoryByUserId(@Path("id") id: String): Call<List<HistoryResponse>>
 
     @GET("/news")
     fun getNews(): Call<NewsResponse>
