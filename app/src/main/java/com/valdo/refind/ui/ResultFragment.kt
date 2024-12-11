@@ -40,7 +40,23 @@ class ResultFragment : Fragment() {
                 .into(resultImage)
         }
 
-        resultText.text = predictionResult ?: "No prediction result available"
+        val displayText = when (predictionResult) {
+            "plastic" -> getString(R.string.plastic)
+            "metal" -> getString(R.string.metal)
+            "paper" -> getString(R.string.paper)
+            "cardboard" -> getString(R.string.cardboard)
+            "clothes" -> getString(R.string.clothe)
+            "shoe" -> getString(R.string.shoe)
+            "glass" -> getString(R.string.glass)
+            "biological" -> getString(R.string.biological)
+            "battery"-> getString(R.string.battery)
+            "trash"-> getString(R.string.trash)
+            else -> "yo ndak tau"
+        }
+
+
+
+        resultText.text = displayText
 
         // Handle button click to open the CraftFragment with the predictionResult label
         craftListButton.setOnClickListener {

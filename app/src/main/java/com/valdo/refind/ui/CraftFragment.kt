@@ -67,6 +67,14 @@ class CraftFragment : Fragment() {
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+    }
+
     private fun addToBookmarks(craft: CraftResponse) {
         BookmarkRepository.toggleBookmark(
             craft,

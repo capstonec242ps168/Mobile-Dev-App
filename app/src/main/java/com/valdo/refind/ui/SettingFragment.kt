@@ -100,7 +100,7 @@ class SettingFragment : Fragment() {
             cameraSwitch.isChecked = true
             cameraSwitch.isEnabled = false
             (activity as? MainActivity)?.enableFAB(true) // Mengaktifkan FAB
-            Toast.makeText(context, "Anda telah mengizinkan akses kamera. Selamat menikmati!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Anda telah mengizinkan akses kamera", Toast.LENGTH_SHORT).show()
         } else {
             cameraSwitch.isChecked = false
             cameraSwitch.isEnabled = true

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.valdo.refind.R
 import com.valdo.refind.data.remote.ApiClient
 import com.valdo.refind.data.remote.ApiClient.apiService
@@ -123,10 +124,13 @@ class HomeFragment : Fragment() {
         rvNews.adapter = listNewsAdapter
     }
     private fun fetchNews() {
+        val progressIndicator = view?.findViewById<CircularProgressIndicator>(R.id.progressIndicatorNews)
+        progressIndicator?.visibility = View.VISIBLE // Show the progress indicator
         // Example API call, replace with your actual logic
         val apiService = ApiClient.apiService
         apiService.getNews().enqueue(object : Callback<NewsResponse> {
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
+                progressIndicator?.visibility = View.GONE // Hide the progress indicator
                 if (response.isSuccessful) {
                     val newsList = response.body()?.result ?: emptyList()
                     listNewsAdapter.updateNews(newsList) // Update adapter with fetched news
