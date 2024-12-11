@@ -42,6 +42,10 @@ class LandingActivity : AppCompatActivity() {
         binding.signInButton.setOnClickListener { signIn() }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 
     private fun signIn() {
         val credentialManager = CredentialManager.create(this)
