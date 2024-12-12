@@ -21,6 +21,7 @@ class BookmarkFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ListCraftAdapter
+    private lateinit var emptyTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +36,7 @@ class BookmarkFragment : Fragment() {
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewBookmark)
+        emptyTextView = view.findViewById(R.id.emptyBookmarksText)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         adapter = ListCraftAdapter(
@@ -61,6 +63,7 @@ class BookmarkFragment : Fragment() {
         BookmarkRepository.getBookmarkedCrafts(
             onResult = { bookmarks ->
                 adapter.setCrafts(bookmarks)
+                updateEmptyState(bookmarks.isEmpty())
             },
             onFailure = { e ->
                 val snackbar = Snackbar.make(
@@ -68,11 +71,21 @@ class BookmarkFragment : Fragment() {
                     "Error loading bookmarks: ${e.message}",
                     Snackbar.LENGTH_SHORT
                 )
-                // Adjust position for the error snackbar
                 adjustSnackbarPosition(snackbar)
                 snackbar.show()
+                updateEmptyState(true)
             }
         )
+    }
+
+    private fun updateEmptyState(isEmpty: Boolean) {
+        if (isEmpty) {
+            emptyTextView.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            emptyTextView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
     }
 
     private fun removeFromBookmarks(craft: CraftResponse) {

@@ -37,4 +37,5 @@
     <string name="other">Lainnya</string>
     <string name="continue_with_google">Masuk Dengan Google</string>
     <string name="result_title">Barang tersebut merupakan :</string>
+    <string name="empty_bookmark">Belum ada yang tersimpan</string>
 </resources>
