@@ -16,13 +16,10 @@ import com.valdo.refind.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var isBookmarked = false // Track the bookmark state
-    private var isHome = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Request permissions if not granted
         if (!hasRequiredPermissions()) {
             ActivityCompat.requestPermissions(
                 this, CameraX_Permissions, 0
@@ -32,13 +29,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up Toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.navigationIcon?.setTint(ContextCompat.getColor(this, R.color.black))
 
-        // Bottom navigation listener
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_home -> {
@@ -51,17 +46,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Open HomeFragment by default
         if (savedInstanceState == null) {
             openFragment(HomeFragment())
         }
 
-        // Floating Action Button (FAB) click listener
         binding.fab.setOnClickListener {
             openFragment(ScanFragment())
         }
 
-        // Listen for back stack changes to update toolbar title
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             val title = when (fragment) {
@@ -74,11 +66,10 @@ class MainActivity : AppCompatActivity() {
                 is DetailNewsFragment -> "Berita"
                 is DetailCraftFragment -> "Kerajinan"
                 is NoCraftFragment -> {
-                    // Check if the flag is passed in the arguments
                     if (fragment.arguments?.getBoolean("isCraft") == true) {
-                        "Kerajinan"  // Show "Crafts" if the flag is true
+                        "Kerajinan"
                     } else {
-                        "Hasil"  // Show "Result" by default
+                        "Hasil"
                     }
                 }
                 else -> getString(R.string.app_name)
@@ -90,18 +81,18 @@ class MainActivity : AppCompatActivity() {
     private fun updateHomeIcon(fragment: Fragment) {
         val homeItem = binding.bottomNavigation.menu.findItem(R.id.bottom_home)
         if (fragment is HomeFragment) {
-            homeItem.setIcon(R.drawable.baseline_home_24) // Filled home icon
+            homeItem.setIcon(R.drawable.baseline_home_24)
         } else {
-            homeItem.setIcon(R.drawable.outline_home_24) // Outline home icon
+            homeItem.setIcon(R.drawable.outline_home_24)
         }
     }
 
     private fun updateBookmarkIcon(fragment: Fragment) {
         val bookmarkItem = binding.bottomNavigation.menu.findItem(R.id.bottom_bookmark)
         if (fragment is BookmarkFragment) {
-            bookmarkItem.setIcon(R.drawable.baseline_bookmark_24) // Filled home icon
+            bookmarkItem.setIcon(R.drawable.baseline_bookmark_24)
         } else {
-            bookmarkItem.setIcon(R.drawable.baseline_bookmark_border_24) // Outline home icon
+            bookmarkItem.setIcon(R.drawable.baseline_bookmark_border_24)
         }
     }
 
@@ -125,45 +116,40 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // Handle drawer if open, otherwise handle fragment back navigation
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            // Check if there's more than one fragment in the back stack
             val backStackCount = supportFragmentManager.backStackEntryCount
 
             if (backStackCount > 1) {
-                // If there are fragments in the back stack, pop the current fragment and show the previous one
                 super.onBackPressed()
             } else {
-                // If there is only one fragment (the root fragment), exit the app
-                // Alternatively, you could handle the behavior differently, e.g., prompt user before exiting
                 finish()
             }
         }
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         updateToolbar(currentFragment ?: HomeFragment())
+        updateHomeIcon(currentFragment ?: HomeFragment())
+        updateBookmarkIcon(currentFragment ?: HomeFragment())
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed() // Handle back navigation
+        onBackPressed()
         return true
     }
 
     private fun openFragment(fragment: Fragment) {
         val fragmentTag = fragment::class.java.simpleName
 
-        // Check if the fragment is already in the container
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment != null && currentFragment::class.java.simpleName == fragmentTag) {
-            return // Prevent reloading the same fragment
+            return
         }
 
-        // Replace the fragment and add to back stack
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment, fragmentTag)
-            .addToBackStack(fragmentTag) // Use the class name as the tag
+            .addToBackStack(fragmentTag)
             .commit()
 
         updateToolbar(fragment)
@@ -174,10 +160,8 @@ class MainActivity : AppCompatActivity() {
     private fun updateToolbar(fragment: Fragment) {
         // Check the fragment type and adjust the toolbar accordingly
         if (fragment is HomeFragment) {
-            // Hide the home button (back button) for HomeFragment
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
         } else {
-            // Show the home button (back button) for other fragments
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
@@ -191,7 +175,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Handle the result of the permission request
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -200,13 +183,11 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 0) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Simpan status izin ke SharedPreferences
                 val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 sharedPreferences.edit().putBoolean("camera_permission", true).apply()
-                // Beri tahu pengguna bahwa izin telah diberikan
-                Toast.makeText(this, "Izin kamera diizinkan!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "akses kamera diizinkan!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Izin kamera ditolak", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "akses kamera ditolak", Toast.LENGTH_SHORT).show()
             }
         }
     }

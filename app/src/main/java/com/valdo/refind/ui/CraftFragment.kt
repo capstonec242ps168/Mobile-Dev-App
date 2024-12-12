@@ -54,7 +54,6 @@ class CraftFragment : Fragment() {
         )
         recyclerView.adapter = adapter
 
-        // Retrieve label from arguments
         val label = arguments?.getString("label") ?: ""
         fetchCrafts(label)
     }
@@ -80,9 +79,9 @@ class CraftFragment : Fragment() {
             craft,
             onSuccess = { isAdded ->
                 val message = if (isAdded) {
-                    "${craft.Crafts?.name} tersimpan!"
+                    "${craft.Crafts.name} tersimpan!"
                 } else {
-                    "${craft.Crafts?.name} dihapus dari bookmark!"
+                    "${craft.Crafts.name} dihapus dari bookmark!"
                 }
 
                 val snackbar = Snackbar.make(
@@ -110,7 +109,6 @@ class CraftFragment : Fragment() {
     }
 
     private fun fetchCrafts(label: String) {
-        // Now the full URL path will be handled in the API client
         val call = ApiClient.apiService.getCraftsByLabel(label)
         val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar)
 
@@ -130,8 +128,8 @@ class CraftFragment : Fragment() {
                     val craftsResponse = response.body()
                     if (craftsResponse != null && craftsResponse.status == "success") {
                         val resultList = craftsResponse.result
-                        if (!resultList.isNullOrEmpty()) {
-                            adapter.setCrafts(resultList) // Update RecyclerView with the crafts list
+                        if (resultList.isNotEmpty()) {
+                            adapter.setCrafts(resultList)
                         } else {
                             Log.e(TAG, "No crafts found in the response.")
                         }
@@ -154,14 +152,13 @@ class CraftFragment : Fragment() {
         val fragment = DetailCraftFragment()
         val bundle = Bundle().apply {
             putInt("craft_id", craft.craft_id)
-            putString("name", craft.Crafts?.name)
-            putString("image", craft.Crafts?.image)
-            putString("tools_materials", craft.Crafts?.tools_materials)
-            putString("step", craft.Crafts?.step)
+            putString("name", craft.Crafts.name)
+            putString("image", craft.Crafts.image)
+            putString("tools_materials", craft.Crafts.tools_materials)
+            putString("step", craft.Crafts.step)
         }
         fragment.arguments = bundle
 
-        // Set up transitions
         fragment.sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         fragment.enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
 

@@ -34,7 +34,6 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewBookmark)
         emptyTextView = view.findViewById(R.id.emptyBookmarksText)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -47,7 +46,6 @@ class BookmarkFragment : Fragment() {
 
         recyclerView.adapter = adapter
 
-        // Load the bookmarked items
         loadBookmarks()
     }
 
@@ -95,12 +93,12 @@ class BookmarkFragment : Fragment() {
                 if (!isAdded) {
                     val snackbar = Snackbar.make(
                         requireView(),
-                        "${craft.Crafts?.name} dihapus dari bookmark!",
+                        "${craft.Crafts.name} dihapus dari bookmark!",
                         Snackbar.LENGTH_SHORT
                     )
                     adjustSnackbarPosition(snackbar)
                     snackbar.show()
-                    loadBookmarks() // Refresh the list after removal
+                    loadBookmarks()
                 }
             },
             onFailure = { e ->
@@ -126,14 +124,13 @@ class BookmarkFragment : Fragment() {
         val fragment = DetailCraftFragment()
         val bundle = Bundle().apply {
             putInt("craft_id", craft.craft_id)
-            putString("name", craft.Crafts?.name)
-            putString("image", craft.Crafts?.image)
-            putString("tools_materials", craft.Crafts?.tools_materials)
-            putString("step", craft.Crafts?.step)
+            putString("name", craft.Crafts.name)
+            putString("image", craft.Crafts.image)
+            putString("tools_materials", craft.Crafts.tools_materials)
+            putString("step", craft.Crafts.step)
         }
         fragment.arguments = bundle
 
-        // Set up transitions
         fragment.sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         fragment.enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
 

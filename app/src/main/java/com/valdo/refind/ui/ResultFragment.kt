@@ -30,7 +30,6 @@ class ResultFragment : Fragment() {
         resultText = view.findViewById(R.id.predict_result)
         craftListButton = view.findViewById(R.id.btn_craft_result)
 
-        // Retrieve data from arguments
         val imagePath = arguments?.getString("imageUri")
         val predictionResult = arguments?.getString("predictionResult")
 
@@ -56,11 +55,8 @@ class ResultFragment : Fragment() {
             else -> "yo ndak tau"
         }
 
-
-
         resultText.text = displayText
 
-        // Handle button click to open the CraftFragment with the predictionResult label
         craftListButton.setOnClickListener {
             predictionResult?.let { endpoint ->
                 openCraftFragment(endpoint)
@@ -87,10 +83,9 @@ class ResultFragment : Fragment() {
     }
 
     private fun openCraftFragment(endpoint: String) {
-        // Open the CraftFragment, passing the predictionResult as the label
         val craftFragment = CraftFragment()
         val bundle = Bundle().apply {
-            putString("label", endpoint)  // Pass predictionResult as label
+            putString("label", endpoint)
         }
         craftFragment.arguments = bundle
 
@@ -105,7 +100,6 @@ class ResultFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        // Remove specific menu items by ID
         menu.findItem(R.id.action_settings)?.isVisible = false
     }
 }

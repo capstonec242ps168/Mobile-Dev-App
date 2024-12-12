@@ -5,17 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.valdo.refind.R
 import com.valdo.refind.data.remote.ApiClient
 import com.valdo.refind.data.remote.ApiConfig
-import com.valdo.refind.data.remote.ApiService
 import com.valdo.refind.data.remote.NewsResponse
 import com.valdo.refind.adapter.ListNewsAdapter
 import com.valdo.refind.data.remote.NewsItem
@@ -23,12 +22,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment : Fragment() {
+open class HomeFragment : Fragment() {
 
-    private val baseUrl = ApiConfig.BASE_URL // Assuming ApiConfig.BASE_URL is declared in your project
+    private val baseUrl = ApiConfig.BASE_URL
     private lateinit var rvNews: RecyclerView
     private lateinit var listNewsAdapter: ListNewsAdapter
-    private lateinit var apiService: ApiService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +38,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set click listeners for ImageButtons with dynamic logging
         setButtonClickListener(view, R.id.btnPlastik, "plastic")
         setButtonClickListener(view, R.id.btnKertas, "paper")
         setButtonClickListener(view, R.id.btnKardus, "cardboard")
@@ -50,16 +47,16 @@ class HomeFragment : Fragment() {
         setButtonClickListener(view, R.id.btnOrganik, "biological")
         setButtonClickListener(view, R.id.btnKaca, "white-glass")
 
-        rvNews = view.findViewById(R.id.rvNews) // Initialize RecyclerView
-        setupRecyclerView() // Set up the RecyclerView
-        fetchNews() // Fetch the news data
+        rvNews = view.findViewById(R.id.rvNews)
+        setupRecyclerView()
+        fetchNews()
     }
 
-    protected fun setButtonClickListener(view: View, buttonId: Int, endpoint: String) {
+    private fun setButtonClickListener(view: View, buttonId: Int, endpoint: String) {
         view.findViewById<View>(buttonId).setOnClickListener {
             if (endpoint == "biological") {
                 openNoCraftFragment(
-                    R.drawable.gadogado_food, // Replace with the actual drawable resource ID
+                    R.drawable.gadogado_food,
                     getString(R.string.warning_bio),
                     getString(R.string.treatment_bio)
                 )
@@ -118,28 +115,27 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView() {
         rvNews.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         listNewsAdapter = ListNewsAdapter(emptyList()) { newsItem ->
-            openDetailNewsFragment(newsItem) // Callback for item click
+            openDetailNewsFragment(newsItem)
         }
         rvNews.adapter = listNewsAdapter
     }
     private fun fetchNews() {
-        val progressIndicator = view?.findViewById<CircularProgressIndicator>(R.id.progressIndicatorNews)
-        progressIndicator?.visibility = View.VISIBLE // Show the progress indicator
-        // Example API call, replace with your actual logic
+        val progressIndicator = view?.findViewById<ProgressBar>(R.id.progressIndicatorNews)
+        progressIndicator?.visibility = View.VISIBLE
+
         val apiService = ApiClient.apiService
         apiService.getNews().enqueue(object : Callback<NewsResponse> {
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
-                progressIndicator?.visibility = View.GONE // Hide the progress indicator
+                progressIndicator?.visibility = View.GONE
                 if (response.isSuccessful) {
                     val newsList = response.body()?.result ?: emptyList()
-                    listNewsAdapter.updateNews(newsList) // Update adapter with fetched news
+                    listNewsAdapter.updateNews(newsList)
                 } else {
                     Toast.makeText(requireContext(), "Gagal mengambil berita", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -147,7 +143,7 @@ class HomeFragment : Fragment() {
     private fun openDetailNewsFragment(newsItem: NewsItem) {
         val detailFragment = DetailNewsFragment()
         val bundle = Bundle()
-        bundle.putSerializable("newsItem", newsItem) // Pass the news item data
+        bundle.putSerializable("newsItem", newsItem)
         detailFragment.arguments = bundle
 
         parentFragmentManager.beginTransaction()

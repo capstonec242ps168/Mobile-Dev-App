@@ -12,7 +12,6 @@ class AboutFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Any non-UI initialization logic can go here
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
@@ -23,7 +22,6 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate and return the fragment's layout
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
@@ -42,7 +40,6 @@ class AboutFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        // Remove specific menu items by ID
         menu.findItem(R.id.action_settings)?.isVisible = false
     }
 }

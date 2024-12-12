@@ -89,7 +89,6 @@ class LandingActivity : AppCompatActivity() {
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        // Log the ID token to Logcat
         Log.d(TAG, "Token: $idToken")
 
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)

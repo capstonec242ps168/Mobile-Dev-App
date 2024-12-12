@@ -52,21 +52,18 @@ class SettingFragment : Fragment() {
 
         val currentUser = auth.currentUser
 
-        // Check if user is signed in
         if (currentUser != null) {
             val userName = currentUser.displayName
             val userEmail = currentUser.email
             val userPhoto = currentUser.photoUrl
 
-            // Display the user details
             binding.userName.text = userName ?: "No Name"
             binding.userEmail.text = userEmail ?: "No Email"
 
-            // Load user photo using Glide
             Glide.with(this)
                 .load(userPhoto)
-                .placeholder(R.drawable.ic_profile_placeholder) // Optional: Add a placeholder image
-                .apply(RequestOptions.circleCropTransform()) // Make the image circular
+                .placeholder(R.drawable.ic_profile_placeholder)
+                .apply(RequestOptions.circleCropTransform())
                 .into(binding.profileImage)
         } else {
             Log.w("SettingFragment", "No user is signed in")

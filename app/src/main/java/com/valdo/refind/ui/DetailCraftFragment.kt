@@ -24,7 +24,6 @@ class DetailCraftFragment : Fragment() {
         activity?.findViewById<View>(R.id.bottomAppBar)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_craft, container, false)
     }
 
@@ -35,22 +34,17 @@ class DetailCraftFragment : Fragment() {
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
         activity?.findViewById<View>(R.id.fab)?.visibility = View.GONE
 
-
-        // Initialize the views
         craftImage = view.findViewById(R.id.craft_image)
         craftTitle = view.findViewById(R.id.craft_title)
         craftStep = view.findViewById(R.id.craft_step)
 
-        // Retrieve data from arguments
         val craftName = arguments?.getString("name")
         val craftImageURL = arguments?.getString("image")
         val craftStepDetails = arguments?.getString("step")
 
-        // Set data to views
         craftTitle.text = craftName
         craftStep.text = craftStepDetails
 
-        // Load the image using Glide
         if (!craftImageURL.isNullOrEmpty()) {
             Glide.with(requireContext())
                 .load(craftImageURL)
