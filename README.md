@@ -23,6 +23,10 @@ We utilize **Kotlin**, Kotlin offers modern language features, reduces developme
 </p>
 
 - **Craft List**: Explore a variety of craft ideas.
+<p align="left">
+  <img src="https://github.com/capstonec242ps168/Mobile-Dev-App/blob/e047a1c17b0dafaf14a8bf6ce6cc75fb1cb3308b/craft%20list.jpg" alt="Craft list" style="width:20%; border: 1px solid black;">
+</p>
+  
 - **Craft Details**: Learn about materials needed and step-by-step guides for crafting.
 <p align="left">
   <img src="https://github.com/capstonec242ps168/Mobile-Dev-App/blob/fdbaf02107131e4476a5c96b096f7089bbe564ba/detail.png" alt="Detail Craft" style="width:20%; border: 1px solid black;">
