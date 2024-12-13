@@ -45,14 +45,14 @@ class ResultFragment : Fragment() {
             "paper" -> getString(R.string.paper)
             "cardboard" -> getString(R.string.cardboard)
             "clothes" -> getString(R.string.clothe)
-            "shoe" -> getString(R.string.shoe)
+            "shoes" -> getString(R.string.shoe)
             "white-glass" -> getString(R.string.glass)
             "green-glass" -> getString(R.string.glass)
             "brown-glass" -> getString(R.string.glass)
             "biological" -> getString(R.string.biological)
             "battery"-> getString(R.string.battery)
             "trash"-> getString(R.string.trash)
-            else -> "yo ndak tau"
+            else -> "barang tidak terdeteksi silahkan ulangi"
         }
 
         resultText.text = displayText
