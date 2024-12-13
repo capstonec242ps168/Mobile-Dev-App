@@ -18,7 +18,7 @@ We utilize **Android Studio**, Kotlin offers modern language features, reduces d
 ## Features
 - **Scanning and Recycle Detection**: Identify recyclable materials with ease.
 <p align="left">
-  https://github.com/capstonec242ps168/Mobile-Dev-App/blob/a34d53b86308f8a2b1dd397f9c290aa1bf06e6b8/scan.jpg
+  <img src="https://github.com/capstonec242ps168/Mobile-Dev-App/blob/8858c28b3235d79b0f55da175db0c2e10d1c2f21/scan.jpg" alt="Scan" style="width:100%; border: 1px solid black;">
 </p>
 - **Craft List**: Explore a variety of craft ideas.
 - **Craft Details**: Learn about materials needed and step-by-step guides for crafting.
